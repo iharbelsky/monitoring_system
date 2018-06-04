@@ -4,7 +4,3 @@ spring:
       name: user
       password: user
       roles: USER
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp

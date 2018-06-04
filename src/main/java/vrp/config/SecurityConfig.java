@@ -12,16 +12,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/","/home")
-            .permitAll()
-            .antMatchers("/**")
-            .hasAnyRole("USER","ADMIN")
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .usernameParameter("username")
-            .passwordParameter("password")
-            .successForwardUrl("/hello");
+                .antMatchers("/","/home")
+                .permitAll()
+                .antMatchers("/**")
+                .hasRole("USER")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll();
     }
 }

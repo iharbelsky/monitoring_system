@@ -17,9 +17,10 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value="/hello", method = {RequestMethod.GET, RequestMethod.POST} )
+    @RequestMapping(value="/hello", method = RequestMethod.GET)
     public String hello(){
         return "hello";
     }
+
 
 }
