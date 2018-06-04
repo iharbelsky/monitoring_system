@@ -5,9 +5,15 @@
 
 </head>
 <body>
+
+<div class="center" th:if="${param.logout}">
+    You have been logged out.
+</div>
 <div class="center" th:if="${param.error}">
     Invalid username and password.
 </div>
+
+
 
 
     <form th:action="@{/login}" method="post">
@@ -28,9 +34,7 @@
         </table>
     </form>
 
-    <div class="center" th:if="${param.logout}">
-        You have been logged out.
-    </div>
+
 
 </body>
 </html>
