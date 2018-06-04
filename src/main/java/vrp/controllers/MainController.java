@@ -17,7 +17,7 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value="/hello", method = RequestMethod.GET)
+    @RequestMapping(value="/hello", method = {RequestMethod.GET, RequestMethod.POST} )
     public String hello(){
         return "hello";
     }
