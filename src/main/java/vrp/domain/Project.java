@@ -2,8 +2,7 @@ package vrp.domain;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "projects", schema = "monitoring")
@@ -13,12 +12,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(name = "name_project")
-    private String name;
-/*
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_project")
-    private List<Module> modules = new ArrayList<>();*/
+    private String nameProject;
+
 
     public Project() {
     }
@@ -32,20 +29,11 @@ public class Project {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProject() {
+        return nameProject;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
+    public void setNameProject(String nameProject) {
+        this.nameProject = nameProject;
     }
 }

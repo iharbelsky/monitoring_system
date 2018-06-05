@@ -12,6 +12,6 @@ INSERT INTO monitoring.modules(name_module,id_project) VALUES('service',2);
 INSERT INTO monitoring.modules(name_module,id_project) VALUES('DAO',2);
 
 --INSERT TEST VALUE INTO
-INSERT INTO monitoring.logs(id_module,text_log) VALUES(1,'{"date": "040618" ,"text":"Build Success"}');
-INSERT INTO monitoring.logs(id_module,text_log) VALUES(2,'{"date": "040618" ,"text":"Error"}');
-INSERT INTO monitoring.logs(id_module,text_log) VALUES(4,'{"date": "040618" ,"text":"Build Success"}');
+INSERT INTO monitoring.logs(id_module,text_log,created_at) VALUES(1,'{"text":"Build Success"}','05/06/2018');
+INSERT INTO monitoring.logs(id_module,text_log,created_at) VALUES(2,'{"text":"Error"}','05/06/2018');
+INSERT INTO monitoring.logs(id_module,text_log,created_at) VALUES(4,'{"text":"Build Success"}','05/06/2018');

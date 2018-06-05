@@ -17,7 +17,6 @@ public class ProjectController {
         return projectRepo.findAll();
     }
 
-
     @RequestMapping(value = "/set", method = RequestMethod.POST)
     public Project setProject(@RequestBody Project project) {
         return projectRepo.save(project);
