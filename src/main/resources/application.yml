@@ -4,3 +4,12 @@ spring:
       name: user
       password: user
       roles: USER
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: kbandarchyk
+    password: Anhelis1991
+    url: jdbc:postgresql://localhost:5432/monitoring_system
+
+  jpa:
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
