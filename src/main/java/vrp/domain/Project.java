@@ -15,10 +15,10 @@ public class Project {
 
     @Column(name = "name_project")
     private String name;
-
+/*
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_project")
-    private List<Module> modules = new ArrayList<>();
+    private List<Module> modules = new ArrayList<>();*/
 
     public Project() {
     }
