@@ -2,7 +2,6 @@ package vrp.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "projects", schema = "monitoring")
@@ -12,14 +11,12 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "name_project")
     private String nameProject;
 
 
     public Project() {
     }
-
 
     public Long getId() {
         return id;

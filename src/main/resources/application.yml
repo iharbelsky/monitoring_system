@@ -12,7 +12,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/monitoring_system
     hikari:
       data-source-properties: stringtype=unspecified
-
   jpa:
     properties:
       hibernate.temp.use_jdbc_metadata_defaults: false
