@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 public class Module {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @NotNull
+
     @Column(name = "name_module")
     private String nameModule;
 
-    @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="id_project")
     private Project project;
 
@@ -23,13 +23,11 @@ public class Module {
 
     }
 
-    public int getId() {
-
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
-
+    public void setId(Long id) {
         this.id = id;
     }
 

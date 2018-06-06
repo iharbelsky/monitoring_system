@@ -1,10 +1,7 @@
 package vrp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vrp.dto.ProjectDTO;
 import vrp.service.ProjectService;
 
@@ -24,8 +21,9 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    @RequestMapping(value = "/set", method = RequestMethod.POST)
-    public void setProject(@RequestBody ProjectDTO projectDTO) {
-         projectService.saveProject(projectDTO);
+    @RequestMapping(value="/get/{nameProject}", method = RequestMethod.GET)
+    public ProjectDTO getProjectByProjectName(@PathVariable(name = "nameProject") String nameProject){
+        return projectService.getProjectByProjectName(nameProject);
     }
+
 }
