@@ -1,11 +1,13 @@
 package vrp.domain;
 
+import vrp.exception.CreateInvalidObjectException;
+
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-@Table(name = "logs", schema = "monitoring")
+@Table(name = "logs"
+     , schema = "monitoring")
 public class Log {
 
     @Id
@@ -22,20 +24,24 @@ public class Log {
     @JoinColumn(name = "id_module")
     private Module module;
 
-    public Log() {
+    protected Log() {
+
     }
 
-    public Log(String textLog, Date createdAt, Module module) {
+    public Log(final String textLog
+             , final Date createdAt
+             , final Module module) {
         this.textLog = textLog;
         this.createdAt = createdAt;
         this.module = module;
+        validateCreateObject();
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,7 +49,7 @@ public class Log {
         return textLog;
     }
 
-    public void setTextLog(String textLog) {
+    protected void setTextLog(final String textLog) {
         this.textLog = textLog;
     }
 
@@ -51,7 +57,7 @@ public class Log {
         return module;
     }
 
-    public void setModule(Module module) {
+    protected void setModule(final Module module) {
         this.module = module;
     }
 
@@ -59,8 +65,32 @@ public class Log {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt)
+    protected void setCreatedAt(final Date createdAt)
     {
         this.createdAt = createdAt;
+    }
+
+    protected void validateCreateObject(){
+        validateTextLog();
+        validateCreatedDate();
+        validateModule();
+    }
+
+    protected void validateTextLog(){
+        if(textLog == null || textLog.isEmpty()){
+            throw new CreateInvalidObjectException("text log can not be empty");
+        }
+    }
+
+    protected void validateCreatedDate(){
+        if(createdAt == null){
+            throw new CreateInvalidObjectException("date can not be null");
+        }
+    }
+
+    protected void validateModule(){
+        if(module == null){
+            throw new CreateInvalidObjectException("module can not be null");
+        }
     }
 }

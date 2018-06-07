@@ -1,10 +1,10 @@
 package vrp.domain;
 
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "projects", schema = "monitoring")
+@Table(name = "projects"
+     , schema = "monitoring")
 public class Project {
 
     @Id
@@ -14,15 +14,14 @@ public class Project {
     @Column(name = "name_project")
     private String nameProject;
 
-
-    public Project() {
+    protected Project() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(final Long id) {
         this.id = id;
     }
 
@@ -30,7 +29,7 @@ public class Project {
         return nameProject;
     }
 
-    public void setNameProject(String nameProject) {
+    protected void setNameProject(final String nameProject) {
         this.nameProject = nameProject;
     }
 }

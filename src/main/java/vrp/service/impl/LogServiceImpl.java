@@ -12,8 +12,7 @@ import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.LogService;
 import java.util.Date;
-
-
+import java.util.List;
 
 @Service
 public class LogServiceImpl implements LogService {
@@ -23,44 +22,39 @@ public class LogServiceImpl implements LogService {
     private final ModuleRepository moduleRepository;
 
     @Autowired
-    public LogServiceImpl( LogRepository logRepository
-                          ,ProjectRepository projectRepository
-                          ,ModuleRepository moduleRepository) {
+    public LogServiceImpl(final LogRepository logRepository
+                        , final ProjectRepository projectRepository
+                        , final ModuleRepository moduleRepository) {
         this.logRepository = logRepository;
         this.projectRepository = projectRepository;
         this.moduleRepository = moduleRepository;
     }
 
-
     @Override
-    public void writeLog(LogDTO logDTO) {
-
+    public void writeLog(final LogDTO logDTO) {
         final var module = validateModuleName(logDTO);
         final var log = new Log(logDTO.getTextLog()
-                               ,new Date()
-                               ,module);
+                              , new Date()
+                              , module);
         logRepository.save(log);
-
     }
 
-
-    protected Module validateModuleName(LogDTO logDTO) {
+    protected Module validateModuleName(final LogDTO logDTO) {
         final var project = validateProjectName(logDTO);
-        final var modules = moduleRepository.findByProjectId(project.getId());
-        final var module = modules.stream()
-                                  .filter(obj -> logDTO.getModuleName()
-                                                       .equals(obj.getNameModule()))
-                                  .findFirst()
-                                  .orElseThrow(() -> new ResourceNotFoundException("Module not found"));
-        return module;
+        return getAllModulesByProject(project).stream()
+                                              .filter(obj -> logDTO.getModuleName()
+                                                                   .equals(obj.getNameModule()))
+                                              .findFirst()
+                                              .orElseThrow(() -> new ResourceNotFoundException("Module not found"));
     }
 
-    protected Project validateProjectName(LogDTO logDTO){
+    protected Project validateProjectName(final LogDTO logDTO){
         return projectRepository.findByNameProject(logDTO.getProjectName())
                                 .orElseThrow(() -> new ResourceNotFoundException("Project not Found"));
-
     }
 
-
+    protected List<Module> getAllModulesByProject(final Project project){
+        return moduleRepository.findByProjectId(project.getId());
+    }
 
 }

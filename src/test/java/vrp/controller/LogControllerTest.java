@@ -32,15 +32,15 @@ public class LogControllerTest {
     @WithMockUser(roles = "USER")
     @Test
     public void workPostControllerTest() throws Exception {
-
-        final var model = new ObjectMapper().writeValueAsString(new LogDTO("internet-shop1", "controller", "{\"text\":\"Build Success111\"}"));
-
+        final var model = new ObjectMapper().writeValueAsString(new LogDTO("internet-shop1"
+                                                                         , "controller"
+                                                                         , "{\"text\":\"Build Success111\"}"));
         mvc.perform(post("/log/write").with(SecurityMockMvcRequestPostProcessors.csrf())
-                                                .accept(MediaType.APPLICATION_JSON)
-                                                .contentType(MediaType.APPLICATION_JSON)
-                                                .characterEncoding("UTF-8")
-                                                .content(model))
-                                                .andExpect(status().isOk());
+                                      .accept(MediaType.APPLICATION_JSON)
+                                      .contentType(MediaType.APPLICATION_JSON)
+                                      .characterEncoding("UTF-8")
+                                      .content(model))
+                                      .andExpect(status().isOk());
     }
 
 }

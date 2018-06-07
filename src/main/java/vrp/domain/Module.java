@@ -3,7 +3,8 @@ package vrp.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "modules", schema = "monitoring")
+@Table(name = "modules"
+     , schema = "monitoring")
 public class Module {
 
     @Id
@@ -14,10 +15,10 @@ public class Module {
     private String nameModule;
 
     @ManyToOne
-    @JoinColumn(name="id_project")
+    @JoinColumn(name = "id_project")
     private Project project;
 
-    public Module() {
+    protected Module() {
 
     }
 
@@ -25,7 +26,7 @@ public class Module {
         return id;
     }
 
-    public void setId(Long id) {
+    protected void setId(final Long id) {
         this.id = id;
     }
 
@@ -33,8 +34,7 @@ public class Module {
         return nameModule;
     }
 
-
-    public void setNameModule(String nameModule) {
+    protected void setNameModule(final String nameModule) {
         this.nameModule = nameModule;
     }
 
@@ -42,7 +42,7 @@ public class Module {
         return project;
     }
 
-    public void setProject(Project project) {
+    protected void setProject(final Project project) {
         this.project = project;
     }
 }
