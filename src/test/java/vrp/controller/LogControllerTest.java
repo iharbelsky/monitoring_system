@@ -1,6 +1,4 @@
-
 package vrp.controller;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -16,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import vrp.dto.LogDTO;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(LogController.class)

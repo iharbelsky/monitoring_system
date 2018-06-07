@@ -2,7 +2,6 @@ package vrp.domain;
 
 import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +15,15 @@ public class Module {
     @Column(name = "name_module")
     private String nameModule;
 
-    @ManyToOne
+    protected Module() {
+    }
+
+    public Module(String nameModule, Project project) {
+        this.nameModule = nameModule;
+        this.project = project;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_project")
     private Project project;
 

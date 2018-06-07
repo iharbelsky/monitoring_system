@@ -2,7 +2,6 @@ package vrp.domain;
 
 import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +14,13 @@ public class Project {
 
     @Column(name = "name_project")
     private String nameProject;
+
+    protected Project() {
+    }
+
+    public Project(String nameProject) {
+        this.nameProject = nameProject;
+    }
 
     public Long getId() {
         return id;

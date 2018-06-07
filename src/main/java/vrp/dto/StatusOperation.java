@@ -2,20 +2,19 @@ package vrp.dto;
 
 public class StatusOperation {
 
-    private final int code;
-    private final String text;
+    private final int status;
+    private final String message;
 
-    public StatusOperation( final int  code
-                          , final String  text) {
-        this.code=code;
-        this.text = text;
+    public StatusOperation(final int  status, final String  message) {
+        this.status = status;
+        this.message = message;
     }
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 }

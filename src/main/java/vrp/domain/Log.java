@@ -19,7 +19,7 @@ public class Log {
     @Column(name = "created_at")
     private Date createdAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_module")
     private Module module;
 

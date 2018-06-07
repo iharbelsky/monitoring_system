@@ -1,5 +1,6 @@
 package vrp.dto;
 
+import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 
 public class LogDTO {
@@ -39,20 +40,21 @@ public class LogDTO {
     }
 
     protected void validateTextLog(){
-        if(textLog == null || textLog.isEmpty()){
-            throw new CreateInvalidObjectException("text log can not be empty");
+        if(StringUtils.isEmpty(textLog)){
+            throw new CreateInvalidObjectException("Text log can not be empty");
         }
     }
 
     protected void validateProjectName(){
-        if(projectName == null || projectName.isEmpty()){
-            throw new CreateInvalidObjectException("project name can not be empty");
+        if(StringUtils.isEmpty(projectName)){
+            throw new CreateInvalidObjectException("Project name can not be empty");
         }
     }
 
     protected void validateModuleName(){
-        if(moduleName == null || moduleName.isEmpty()){
-            throw new CreateInvalidObjectException("module name can not be empty");
+        if(StringUtils.isEmpty(moduleName)){
+            throw new CreateInvalidObjectException("Module name can not be empty");
         }
     }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import vrp.dto.LogDTO;
 import vrp.dto.StatusOperation;
+import vrp.exception.PreconditionFailed;
 import vrp.exception.ResourceNotFoundException;
 import vrp.service.LogService;
 
@@ -26,12 +27,10 @@ public class LogController {
         try {
             logService.saveLog(logDTO);
         } catch (ResourceNotFoundException e) {
-            throw new ResourceNotFoundException(e.getMessage());
+            throw new PreconditionFailed(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PreconditionFailed(e.getMessage());
         }
         return new StatusOperation(200, "Completed successfully");
     }
-
-
 }
