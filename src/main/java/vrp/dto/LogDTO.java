@@ -4,9 +4,12 @@ import vrp.exception.CreateInvalidObjectException;
 
 public class LogDTO {
 
-    private final String projectName;
-    private final String moduleName;
-    private final String textLog;
+    private String projectName;
+    private String moduleName;
+    private String textLog;
+
+    protected LogDTO(){
+    }
 
     public LogDTO( final String projectName
                  , final String moduleName
