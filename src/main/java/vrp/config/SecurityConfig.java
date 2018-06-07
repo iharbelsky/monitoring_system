@@ -1,4 +1,4 @@
-/*
+
 
 package vrp.config;
 
@@ -27,4 +27,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 }
 
-*/
+
