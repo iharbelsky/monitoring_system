@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import vrp.dto.LogDTO;
 import vrp.dto.StatusOperation;
-import vrp.exception.ResourceNotFoundException;
 import vrp.service.LogService;
 
 @RestController
