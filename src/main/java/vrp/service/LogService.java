@@ -4,6 +4,6 @@ import vrp.dto.LogDTO;
 
 public interface LogService {
 
-    void writeLog(LogDTO logDTO);
+    void saveLog(LogDTO logDTO);
 
 }

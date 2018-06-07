@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import vrp.dto.LogDTO;
 import vrp.dto.StatusOperation;
+import vrp.exception.ResourceNotFoundException;
 import vrp.service.LogService;
 
 @RestController
@@ -20,18 +21,17 @@ public class LogController {
         this.logService = logService;
     }
 
-    @RequestMapping(value = "/write"
-                  , method = RequestMethod.POST)
-    public StatusOperation createLog(@RequestBody final LogDTO logDTO){
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public StatusOperation saveLog(@RequestBody final LogDTO logDTO) {
         try {
-            logService.writeLog(logDTO);
-        }catch(Exception e){
+            logService.saveLog(logDTO);
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException(e.getMessage());
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-        return new StatusOperation(200,"Completed successfully");
+        return new StatusOperation(200, "Completed successfully");
     }
-
-
 
 
 }

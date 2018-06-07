@@ -22,38 +22,40 @@ public class LogServiceImpl implements LogService {
     private final ModuleRepository moduleRepository;
 
     @Autowired
-    public LogServiceImpl(final LogRepository logRepository
-                        , final ProjectRepository projectRepository
-                        , final ModuleRepository moduleRepository) {
+    public LogServiceImpl( final LogRepository logRepository
+                         , final ProjectRepository projectRepository
+                         , final ModuleRepository moduleRepository) {
         this.logRepository = logRepository;
         this.projectRepository = projectRepository;
         this.moduleRepository = moduleRepository;
     }
 
     @Override
-    public void writeLog(final LogDTO logDTO) {
-        final var module = validateModuleName(logDTO);
-        final var log = new Log(logDTO.getTextLog()
-                              , new Date()
-                              , module);
+    public void saveLog(final LogDTO logDTO) {
+        final var module = safetyFetchModule(logDTO);
+        final var log = new Log( logDTO.getTextLog()
+                               , new Date()
+                               , module);
         logRepository.save(log);
     }
 
-    protected Module validateModuleName(final LogDTO logDTO) {
-        final var project = validateProjectName(logDTO);
-        return getAllModulesByProject(project).stream()
+    private Module safetyFetchModule(final LogDTO logDTO) {
+
+
+        final var project = safetyFetchProject(logDTO);
+        return safetyFetchModulesByProject(project).stream()
                                               .filter(obj -> logDTO.getModuleName()
                                                                    .equals(obj.getNameModule()))
                                               .findFirst()
                                               .orElseThrow(() -> new ResourceNotFoundException("Module not found"));
     }
 
-    protected Project validateProjectName(final LogDTO logDTO){
+    private Project safetyFetchProject(final LogDTO logDTO){
         return projectRepository.findByNameProject(logDTO.getProjectName())
                                 .orElseThrow(() -> new ResourceNotFoundException("Project not Found"));
     }
 
-    protected List<Module> getAllModulesByProject(final Project project){
+    private List<Module> safetyFetchModulesByProject(final Project project){
         return moduleRepository.findByProjectId(project.getId());
     }
 

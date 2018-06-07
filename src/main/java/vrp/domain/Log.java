@@ -1,13 +1,12 @@
 package vrp.domain;
 
+import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "logs"
-     , schema = "monitoring")
+@Table(name = "logs", schema = "monitoring")
 public class Log {
 
     @Id
@@ -25,12 +24,9 @@ public class Log {
     private Module module;
 
     protected Log() {
-
     }
 
-    public Log(final String textLog
-             , final Date createdAt
-             , final Module module) {
+    public Log( final String textLog, final Date createdAt, final Module module) {
         this.textLog = textLog;
         this.createdAt = createdAt;
         this.module = module;
@@ -65,32 +61,36 @@ public class Log {
         return createdAt;
     }
 
-    protected void setCreatedAt(final Date createdAt)
-    {
+    protected void setCreatedAt(final Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    protected void validateCreateObject(){
+    private void validateCreateObject() {
         validateTextLog();
         validateCreatedDate();
         validateModule();
     }
 
-    protected void validateTextLog(){
-        if(textLog == null || textLog.isEmpty()){
-            throw new CreateInvalidObjectException("text log can not be empty");
+    private void validateTextLog() {
+        if (StringUtils.isEmpty(textLog)) {
+            throw new CreateInvalidObjectException("Text log can not be empty");
         }
     }
 
-    protected void validateCreatedDate(){
-        if(createdAt == null){
-            throw new CreateInvalidObjectException("date can not be null");
+    private void validateCreatedDate() {
+        if (createdAt == null) {
+            throw new CreateInvalidObjectException("Date can not be null");
         }
     }
 
-    protected void validateModule(){
-        if(module == null){
-            throw new CreateInvalidObjectException("module can not be null");
+    private void validateModule() {
+        if (module == null) {
+            throw new CreateInvalidObjectException("Module can not be null");
         }
+    }
+
+    @PostLoad
+    private void postLoad(){
+        validateCreateObject();
     }
 }

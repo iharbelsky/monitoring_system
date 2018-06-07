@@ -1,10 +1,12 @@
 package vrp.domain;
 
+import org.thymeleaf.util.StringUtils;
+import vrp.exception.CreateInvalidObjectException;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "projects"
-     , schema = "monitoring")
+@Table(name = "projects", schema = "monitoring")
 public class Project {
 
     @Id
@@ -13,9 +15,6 @@ public class Project {
 
     @Column(name = "name_project")
     private String nameProject;
-
-    protected Project() {
-    }
 
     public Long getId() {
         return id;
@@ -32,4 +31,20 @@ public class Project {
     protected void setNameProject(final String nameProject) {
         this.nameProject = nameProject;
     }
+
+    private void validateCreateObject(){
+        validateNameProject();
+    }
+
+    private void validateNameProject(){
+        if(StringUtils.isEmpty(nameProject)){
+            throw new CreateInvalidObjectException("Name project can not be empty");
+        }
+    }
+
+    @PostLoad
+    private void postLoad(){
+        validateCreateObject();
+    }
+
 }

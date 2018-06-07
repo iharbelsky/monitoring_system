@@ -30,7 +30,7 @@ public class LogServiceImplTest {
     @Test
     public void writeLog() {
         final LogDTO logDTO = new LogDTO("internet-shop","controller","{\\\"text\\\":\\\"Build Succes111s\\\"}");
-        logService.writeLog(logDTO);
+        logService.saveLog(logDTO);
 
 
 

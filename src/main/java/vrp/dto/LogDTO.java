@@ -4,17 +4,13 @@ import vrp.exception.CreateInvalidObjectException;
 
 public class LogDTO {
 
-    private String projectName;
-    private String moduleName;
-    private String textLog;
+    private final String projectName;
+    private final String moduleName;
+    private final String textLog;
 
-    protected LogDTO() {
-
-    }
-
-    public LogDTO(final String projectName
-                 ,final String moduleName
-                 ,final String textLog) {
+    public LogDTO( final String projectName
+                 , final String moduleName
+                 , final String textLog) {
         this.projectName = projectName;
         this.moduleName = moduleName;
         this.textLog = textLog;
@@ -25,24 +21,12 @@ public class LogDTO {
         return projectName;
     }
 
-    protected void setProjectName(final String projectName) {
-        this.projectName = projectName;
-    }
-
     public String getModuleName() {
         return moduleName;
     }
 
-    protected void setModuleName(final String moduleName) {
-        this.moduleName = moduleName;
-    }
-
     public String getTextLog() {
         return textLog;
-    }
-
-    protected void setTextLog(final String textLog) {
-        this.textLog = textLog;
     }
 
     protected void validateCreateObject(){
@@ -68,7 +52,4 @@ public class LogDTO {
             throw new CreateInvalidObjectException("module name can not be empty");
         }
     }
-
-
-
 }
