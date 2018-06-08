@@ -55,5 +55,4 @@ public class LogServiceImplTest {
     private Module createTestModule(Project project){
         return new Module("new_module",project);
     }
-
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import vrp.dto.LogDTO;
 import vrp.dto.StatusOperation;
 import vrp.exception.PreconditionFailed;
-import vrp.exception.ResourceNotFoundException;
 import vrp.service.LogService;
 
 @RestController
