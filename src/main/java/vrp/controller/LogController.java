@@ -28,6 +28,6 @@ public class LogController {
         } catch (Exception e) {
             throw new PreconditionFailed(e.getMessage());
         }
-        return new StatusOperation(200, "Completed successfully");
+        return new StatusOperation("Completed successfully");
     }
 }

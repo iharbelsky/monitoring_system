@@ -10,7 +10,7 @@ spring:
     database: org.hibernate.dialect.PostgreSQLDialect
     username: kbandarchyk
     password: 123a456B
-    url: jdbc:postgresql://localhost:5432/monitoring_system
+    url: jdbc:postgresql://localhost:5432/monitoring_system_test
     hikari:
       data-source-properties: stringtype=unspecified
   jpa:
