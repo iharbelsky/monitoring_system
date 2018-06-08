@@ -22,7 +22,7 @@ public class LogControllerIT {
     @Test
     public void validatePostRequestAndSaveToDB() throws Exception{
 
-      final var logDTO = new LogDTO("new_module", "new_module", "{\"text\":\"111Build Error\"}");
+      final var logDTO = new LogDTO("new_project", "new_module", "{\"text\":\"111Build Error1111\"}");
 
        final var model = new ObjectMapper().writeValueAsString(logDTO);
 
