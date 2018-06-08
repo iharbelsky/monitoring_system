@@ -24,7 +24,7 @@ public class LogControllerIT {
 
     @Test
     public void correctPostRequestAndSaveToDB() throws Exception {
-        final TestRestTemplate restTemplate = new TestRestTemplate();
+        final var restTemplate = new TestRestTemplate();
         final var json = new ObjectMapper().writeValueAsString(new LogDTO( "internet-shop"
                                                                          , "controller"
                                                                          , "{\"text\":\"Build Error\"}"));
@@ -38,7 +38,7 @@ public class LogControllerIT {
 
     @Test
     public void incorrectPostRequestAndSaveToDB() throws Exception {
-        final TestRestTemplate restTemplate = new TestRestTemplate();
+        final var restTemplate = new TestRestTemplate();
         final var json = new ObjectMapper().writeValueAsString(new LogDTO( "incorrect_project"
                                                                          , "controller"
                                                                          , "{\"text\":\"Build Error\"}"));
@@ -58,9 +58,9 @@ public class LogControllerIT {
     }
 
     private HttpHeaders getHttpHeaders() {
-        final HttpHeaders headers = new HttpHeaders();
-        final String plainCredentials = "user:user";
-        final String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
+        final var headers = new HttpHeaders();
+        final var plainCredentials = "user:user";
+        final var base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
         headers.add("Authorization", "Basic " + base64Credentials);
         headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
         headers.setContentType(MediaType.APPLICATION_JSON);

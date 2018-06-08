@@ -32,19 +32,19 @@ public class LogServiceImplTest {
 
     @Test
     public void saveCorrectLog() {
-        final LogDTO logDTO = new LogDTO("new_project","new_module","{\"text\":\"Build Error\"}");
+        final var logDTO = new LogDTO("new_project","new_module","{\"text\":\"Build Error\"}");
         logService.saveLog(logDTO);
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void saveIncorrectLogWithoutProject() {
-        final LogDTO logDTO = new LogDTO("new_project1","new_module","{\"text\":\"Build Error\"}");
+        final var logDTO = new LogDTO("new_project1","new_module","{\"text\":\"Build Error\"}");
         logService.saveLog(logDTO);
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void saveIncorrectLogWithoutModule() {
-        final LogDTO logDTO = new LogDTO("new_project","new_module1","{\"text\":\"Build Error\"}");
+        final var logDTO = new LogDTO("new_project","new_module1","{\"text\":\"Build Error\"}");
         logService.saveLog(logDTO);
     }
 
