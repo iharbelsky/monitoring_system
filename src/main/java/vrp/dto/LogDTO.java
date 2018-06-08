@@ -56,5 +56,4 @@ public class LogDTO {
             throw new CreateInvalidObjectException("Module name can not be empty");
         }
     }
-
 }

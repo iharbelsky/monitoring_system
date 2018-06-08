@@ -26,8 +26,6 @@ public class LogController {
     public StatusOperation saveLog(@RequestBody final LogDTO logDTO) {
         try {
             logService.saveLog(logDTO);
-        } catch (ResourceNotFoundException e) {
-            throw new PreconditionFailed(e.getMessage());
         } catch (Exception e) {
             throw new PreconditionFailed(e.getMessage());
         }

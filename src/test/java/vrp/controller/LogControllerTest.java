@@ -25,20 +25,18 @@ public class LogControllerTest {
     @MockBean
     private LogController logController;
 
-
     @WithMockUser(roles = "USER")
     @Test
-    public void workPostControllerTest() throws Exception {
-        final var model = new ObjectMapper().writeValueAsString(new LogDTO("internet-shop1"
+    public void validateLogControllerPost() throws Exception {
+        final var model = new ObjectMapper().writeValueAsString(new LogDTO("internet-shop"
                                                                           , "controller"
-                                                                          , "{\"text\":\"Build Success111\"}"));
+                                                                          , "{\"text\":\"Build Success\"}"));
         mvc.perform(post("/log/save").with(SecurityMockMvcRequestPostProcessors.csrf())
-                                      .accept(MediaType.APPLICATION_JSON)
-                                      .contentType(MediaType.APPLICATION_JSON)
-                                      .characterEncoding("UTF-8")
-                                      .content(model))
-                                      .andExpect(status().isOk());
+                                     .accept(MediaType.APPLICATION_JSON)
+                                     .contentType(MediaType.APPLICATION_JSON)
+                                     .characterEncoding("UTF-8")
+                                     .content(model))
+                                     .andExpect(status().isOk());
     }
-
 }
 

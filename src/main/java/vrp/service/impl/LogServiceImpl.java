@@ -58,5 +58,4 @@ public class LogServiceImpl implements LogService {
     private List<Module> safetyFetchModulesByProject(final Project project){
         return moduleRepository.findByProjectId(project.getId());
     }
-
 }

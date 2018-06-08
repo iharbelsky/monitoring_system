@@ -6,16 +6,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import vrp.domain.Log;
 import vrp.domain.Module;
 import vrp.domain.Project;
 import vrp.dto.LogDTO;
 import vrp.exception.ResourceNotFoundException;
-import vrp.repository.LogRepository;
 import vrp.repository.ModuleRepository;
 import vrp.service.LogService;
 import javax.transaction.Transactional;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,8 +26,7 @@ public class LogServiceImplTest {
     private ModuleRepository moduleRepository;
 
     @Before
-    public void before()
-    {
+    public void before() {
         moduleRepository.save(createTestModule(createTestProject()));
     }
 

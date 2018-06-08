@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
 public class PreconditionFailed extends RuntimeException {
 
-    public PreconditionFailed(String msg) {
-        super(msg);
+    public PreconditionFailed(final String message) {
+        super(message);
     }
 }
