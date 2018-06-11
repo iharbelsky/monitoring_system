@@ -7,6 +7,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "logs", schema = "monitoring")
+@NamedNativeQueries(
+        @NamedNativeQuery(name="Log.findByTextLog",query = "SELECT * FROM monitoring.logs WHERE (text_log->>'text') = ?",resultClass = Log.class)
+)
 public class Log {
 
     @Id

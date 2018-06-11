@@ -27,13 +27,14 @@ public class LogServiceImplTest {
 
     @Before
     public void before() {
-        moduleRepository.save(createTestModule(createTestProject()));
+        moduleRepository.save(new Module("new_module",new Project("new_project")));
     }
 
     @Test
     public void saveCorrectLog() {
         final var logDTO = new LogDTO("new_project","new_module","{\"text\":\"Build Error\"}");
         logService.saveLog(logDTO);
+
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -48,11 +49,4 @@ public class LogServiceImplTest {
         logService.saveLog(logDTO);
     }
 
-    private Project createTestProject(){
-        return new Project("new_project");
-    }
-
-    private Module createTestModule(Project project){
-        return new Module("new_module",project);
-    }
 }
