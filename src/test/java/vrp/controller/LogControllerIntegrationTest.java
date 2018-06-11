@@ -2,7 +2,6 @@ package vrp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +48,7 @@ public class LogControllerIntegrationTest {
         final var restTemplate = new TestRestTemplate();
         final var json = new ObjectMapper().writeValueAsString(new LogDTO( "incorrect_project"
                                                                          , "controller"
-                                                                         , "{\"text\":\"Build Error\"}"));
+                                                                         , "{\"text\":\"Build Error.404\"}"));
         final var requestBody = new HttpEntity<>(json, getHttpHeaders());
         final var responseEntity = restTemplate.exchange( getURI()
                                                         , HttpMethod.POST

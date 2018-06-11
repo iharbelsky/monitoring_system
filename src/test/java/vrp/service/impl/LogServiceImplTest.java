@@ -34,7 +34,6 @@ public class LogServiceImplTest {
     public void saveCorrectLog() {
         final var logDTO = new LogDTO("new_project","new_module","{\"text\":\"Build Error\"}");
         logService.saveLog(logDTO);
-
     }
 
     @Test(expected = ResourceNotFoundException.class)
