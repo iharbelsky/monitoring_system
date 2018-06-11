@@ -3,49 +3,60 @@ package vrp.service.impl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import vrp.MonitoringApplication;
+import vrp.domain.Log;
 import vrp.domain.Module;
 import vrp.domain.Project;
 import vrp.dto.LogDTO;
-import vrp.exception.ResourceNotFoundException;
+import vrp.repository.LogRepository;
 import vrp.repository.ModuleRepository;
-import vrp.service.LogService;
-import javax.transaction.Transactional;
+import vrp.repository.ProjectRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { MonitoringApplication.class })
 @SpringBootTest
-@Transactional
 public class LogServiceImplTest {
 
-    @Autowired
-    private LogService logService;
+    @InjectMocks
+    private LogServiceImpl logService;
 
-    @Autowired
+    @Spy
+    private LogRepository logRepository;
+
+    @Spy
     private ModuleRepository moduleRepository;
+
+    @Spy
+    private ProjectRepository projectRepository;
 
     @Before
     public void before() {
-        moduleRepository.save(new Module("new_module",new Project("new_project")));
+       MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void saveCorrectLog() {
-        final var logDTO = new LogDTO("new_project","new_module","{\"text\":\"Build Error\"}");
-        logService.saveLog(logDTO);
-    }
 
-    @Test(expected = ResourceNotFoundException.class)
-    public void saveIncorrectLogWithoutProject() {
-        final var logDTO = new LogDTO("new_project1","new_module","{\"text\":\"Build Error\"}");
+        final var project = new Project("internet-shop");
+        final var module = new Module("controller", project);
+        final var log = new Log( "{\"text\":\"Build Error\"}"
+                               , new Date()
+                               , module);
+        final var logDTO = new LogDTO( "internet-shop"
+                , "controller"
+                , "{\"text\":\"Build Error\"}");
+        when((projectRepository).findByNameProject(logDTO.getProjectName())).thenReturn(Optional.of(project));
+        when((moduleRepository).findByProjectId(project.getId())).thenReturn(List.of(module));
+        when((logRepository).save(log)).thenReturn(log);
         logService.saveLog(logDTO);
+        verify(logRepository, times(1)).save(notNull());
     }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void saveIncorrectLogWithoutModule() {
-        final var logDTO = new LogDTO("new_project","new_module1","{\"text\":\"Build Error\"}");
-        logService.saveLog(logDTO);
-    }
-
 }
