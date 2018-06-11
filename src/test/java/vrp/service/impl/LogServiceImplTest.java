@@ -51,8 +51,8 @@ public class LogServiceImplTest {
                                , new Date()
                                , module);
         final var logDTO = new LogDTO( "internet-shop"
-                , "controller"
-                , "{\"text\":\"Build Error\"}");
+                                     , "controller"
+                                     , "{\"text\":\"Build Error\"}");
         when((projectRepository).findByNameProject(logDTO.getProjectName())).thenReturn(Optional.of(project));
         when((moduleRepository).findByProjectId(project.getId())).thenReturn(List.of(module));
         when((logRepository).save(log)).thenReturn(log);
