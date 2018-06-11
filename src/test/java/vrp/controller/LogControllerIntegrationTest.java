@@ -18,7 +18,7 @@ import vrp.repository.LogRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MonitoringApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(value = "classpath:/sql/delete_all_logs.sql",executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "classpath:/sql/delete_all_logs.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class LogControllerIntegrationTest {
 
     @LocalServerPort
@@ -39,8 +39,8 @@ public class LogControllerIntegrationTest {
                                                         , requestBody
                                                         , String.class);
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        Assert.assertEquals(1,logRepository.findByTextLog("Build Error.404")
-                                           .size());
+        Assert.assertEquals(1, logRepository.findByTextLog("Build Error.404")
+                                            .size());
     }
 
     @Test
