@@ -4,7 +4,6 @@ spring:
       name: user
       password: user
       roles: USER
-
   datasource:
     driver-class-name: org.postgresql.Driver
     database: org.hibernate.dialect.PostgreSQLDialect
