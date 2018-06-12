@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "logs", schema = "monitoring")
-public class Log {
+public class ModuleEventLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class Log {
     @JoinColumn(name = "id_module")
     private Module module;
 
-    protected Log() {
+    protected ModuleEventLog() {
     }
 
-    public Log( final String textLog, final Date createdAt, final Module module) {
+    public ModuleEventLog(final String textLog, final Date createdAt, final Module module) {
         this.textLog = textLog;
         this.createdAt = createdAt;
         this.module = module;

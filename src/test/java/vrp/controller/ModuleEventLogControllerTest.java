@@ -11,32 +11,32 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import vrp.dto.LogDTO;
+import vrp.dto.ModuleEventLogDTO;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(LogController.class)
-public class LogControllerTest {
+@WebMvcTest(ModuleEventLogController.class)
+public class ModuleEventLogControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private LogController logController;
+    private ModuleEventLogController moduleEventLogController;
 
     @WithMockUser(roles = "USER")
     @Test
     public void validateLogControllerPost() throws Exception {
-        final var model = new ObjectMapper().writeValueAsString(new LogDTO("internet-shop"
+        final var model = new ObjectMapper().writeValueAsString(new ModuleEventLogDTO("internet-shop"
                                                                           , "controller"
                                                                           , "{\"text\":\"Build Success\"}"));
-        mvc.perform(post("/log/save").with(SecurityMockMvcRequestPostProcessors.csrf())
-                                     .accept(MediaType.APPLICATION_JSON)
-                                     .contentType(MediaType.APPLICATION_JSON)
-                                     .characterEncoding("UTF-8")
-                                     .content(model))
-                                     .andExpect(status().isOk());
+        mvc.perform(post("/module_event/save").with(SecurityMockMvcRequestPostProcessors.csrf())
+                                              .accept(MediaType.APPLICATION_JSON)
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .characterEncoding("UTF-8")
+                                              .content(model))
+                                              .andExpect(status().isOk());
     }
 }
 

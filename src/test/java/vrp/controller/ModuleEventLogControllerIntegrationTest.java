@@ -13,12 +13,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import vrp.MonitoringApplication;
-import vrp.dto.LogDTO;
+import vrp.dto.ModuleEventLogDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MonitoringApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = "classpath:/sql/delete_all_logs.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-public class LogControllerIntegrationTest {
+public class ModuleEventLogControllerIntegrationTest {
 
     @LocalServerPort
     private int port;
@@ -35,9 +35,9 @@ public class LogControllerIntegrationTest {
     @Test
     public void correctPostRequestAndSaveToDB() throws Exception {
         final var restTemplate = new TestRestTemplate();
-        final var json = new ObjectMapper().writeValueAsString(new LogDTO( "internet-shop"
-                                                                         , "controller"
-                                                                         , "{\"text\":\"Build Error.404\"}"));
+        final var json = new ObjectMapper().writeValueAsString(new ModuleEventLogDTO( "internet-shop"
+                                                                                    , "controller"
+                                                                                    , "{\"text\":\"Build Error.404\"}"));
         final var requestBody = new HttpEntity<>(json, getHttpHeaders());
         final var responseEntity = restTemplate.exchange( getURI()
                                                         , HttpMethod.POST
@@ -45,17 +45,17 @@ public class LogControllerIntegrationTest {
                                                         , String.class);
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         final var logs = jdbcTemplate.query( SQL_QUERY
-                                           , (rs,Long) -> new LogDTO( rs.getString("name_project")
-                                                                    , rs.getString("name_module")
-                                                                    , rs.getString("text_log")) );
+                                           , (rs,Long) -> new ModuleEventLogDTO( rs.getString("name_project")
+                                                                               , rs.getString("name_module")
+                                                                               , rs.getString("text_log")) );
         Assert.assertEquals(1, logs.size());
     }
     @Test
     public void incorrectPostRequestAndSaveToDB() throws Exception {
         final var restTemplate = new TestRestTemplate();
-        final var json = new ObjectMapper().writeValueAsString(new LogDTO( "incorrect_project"
-                                                                         , "controller"
-                                                                         , "{\"text\":\"Build Error.404\"}"));
+        final var json = new ObjectMapper().writeValueAsString(new ModuleEventLogDTO( "incorrect_project"
+                                                                                    , "controller"
+                                                                                    , "{\"text\":\"Build Error.404\"}"));
         final var requestBody = new HttpEntity<>(json, getHttpHeaders());
         final var responseEntity = restTemplate.exchange( getURI()
                                                         , HttpMethod.POST
@@ -63,15 +63,15 @@ public class LogControllerIntegrationTest {
                                                         , String.class);
         Assert.assertEquals(HttpStatus.PRECONDITION_FAILED, responseEntity.getStatusCode());
         final var logs = jdbcTemplate.query( SQL_QUERY
-                                           , (rs,Long) -> new LogDTO( rs.getString("name_project")
-                                                                    , rs.getString("name_module")
-                                                                    , rs.getString("text_log")) );
+                                           , (rs,Long) -> new ModuleEventLogDTO( rs.getString("name_project")
+                                                                               , rs.getString("name_module")
+                                                                               , rs.getString("text_log")) );
         Assert.assertEquals(0, logs.size());
     }
     private String getURI(){
         return new StringBuilder().append("http://localhost:")
                                   .append(port)
-                                  .append("/log/save")
+                                  .append("/module_event/save")
                                   .toString();
     }
     private HttpHeaders getHttpHeaders() {

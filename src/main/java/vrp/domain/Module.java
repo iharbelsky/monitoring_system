@@ -15,6 +15,10 @@ public class Module {
     @Column(name = "name_module")
     private String nameModule;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_project")
+    private Project project;
+
     protected Module() {
     }
 
@@ -22,10 +26,6 @@ public class Module {
         this.nameModule = nameModule;
         this.project = project;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_project")
-    private Project project;
 
     public Long getId() {
         return id;

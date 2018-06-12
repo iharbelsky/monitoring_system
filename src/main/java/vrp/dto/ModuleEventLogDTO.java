@@ -3,18 +3,16 @@ package vrp.dto;
 import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 
-public class LogDTO {
+public class ModuleEventLogDTO {
 
     private String projectName;
     private String moduleName;
     private String textLog;
 
-    protected LogDTO(){
+    protected ModuleEventLogDTO(){
     }
 
-    public LogDTO( final String projectName
-                 , final String moduleName
-                 , final String textLog) {
+    public ModuleEventLogDTO(final String projectName, final String moduleName, final String textLog) {
         this.projectName = projectName;
         this.moduleName = moduleName;
         this.textLog = textLog;
