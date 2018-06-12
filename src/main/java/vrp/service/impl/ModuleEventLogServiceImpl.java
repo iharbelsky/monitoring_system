@@ -22,9 +22,9 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
     private final ModuleRepository moduleRepository;
 
     @Autowired
-    public ModuleEventLogServiceImpl(final ModuleEventLogRepository moduleEventLogRepository
-                                               , final ProjectRepository projectRepository
-                                               , final ModuleRepository moduleRepository) {
+    public ModuleEventLogServiceImpl( final ModuleEventLogRepository moduleEventLogRepository
+                                    , final ProjectRepository projectRepository
+                                    , final ModuleRepository moduleRepository) {
         this.moduleEventLogRepository = moduleEventLogRepository;
         this.projectRepository = projectRepository;
         this.moduleRepository = moduleRepository;
@@ -39,8 +39,7 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
         moduleEventLogRepository.save(log);
     }
 
-    private Module safetyFetchModule(final ModuleEventLogDTO moduleEventLogDTO) {
-
+    protected Module safetyFetchModule(final ModuleEventLogDTO moduleEventLogDTO) {
         final var project = safetyFetchProject(moduleEventLogDTO);
         return safetyFetchModulesByProject(project).stream()
                                                    .filter(obj -> moduleEventLogDTO.getModuleName()
@@ -49,12 +48,12 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
                                                    .orElseThrow(() -> new ResourceNotFoundException("Module not found"));
     }
 
-    private Project safetyFetchProject(final ModuleEventLogDTO moduleEventLogDTO){
+    protected Project safetyFetchProject(final ModuleEventLogDTO moduleEventLogDTO){
         return projectRepository.findByNameProject(moduleEventLogDTO.getProjectName())
                                 .orElseThrow(() -> new ResourceNotFoundException("Project not Found"));
     }
 
-    private List<Module> safetyFetchModulesByProject(final Project project){
+    protected List<Module> safetyFetchModulesByProject(final Project project){
         return moduleRepository.findByProjectId(project.getId());
     }
 }

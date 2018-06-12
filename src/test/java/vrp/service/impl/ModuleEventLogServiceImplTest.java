@@ -44,7 +44,6 @@ public class ModuleEventLogServiceImplTest {
 
     @Test
     public void saveCorrectLog() {
-
         final var project = new Project("internet-shop");
         final var module = new Module("controller", project);
         final var log = new ModuleEventLog( "{\"text\":\"Build Error\"}"

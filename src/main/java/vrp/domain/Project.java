@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Table(name = "projects", schema = "monitoring")
 public class Project {
 
+    //////////////////////////////////
+    // Calculated fields
+    //
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,18 +19,27 @@ public class Project {
     @Column(name = "name_project")
     private String nameProject;
 
+    //////////////////////////////////
+    // Constructors
+    //
+
     protected Project() {
     }
 
     public Project(String nameProject) {
         this.nameProject = nameProject;
+        validateCreateObject();
     }
+
+    //////////////////////////////////
+    // Accessors
+    //
 
     public Long getId() {
         return id;
     }
 
-    protected void setId(final Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 
@@ -34,10 +47,15 @@ public class Project {
         return nameProject;
     }
 
-    protected void setNameProject(final String nameProject) {
+    protected void setNameProject(String nameProject) {
         this.nameProject = nameProject;
     }
 
+    //////////////////////////////////
+    // Validate invariants fields
+    //
+
+    @PostLoad
     private void validateCreateObject(){
         validateNameProject();
     }
@@ -46,10 +64,5 @@ public class Project {
         if(StringUtils.isEmpty(nameProject)){
             throw new CreateInvalidObjectException("Name project can not be empty");
         }
-    }
-
-    @PostLoad
-    private void postLoad(){
-        validateCreateObject();
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import vrp.dto.ModuleEventLogDTO;
 import vrp.dto.StatusOperation;
-import vrp.exception.PreconditionFailed;
+import vrp.exception.PreconditionFailedException;
 import vrp.service.ModuleEventLogService;
 
 @RestController
@@ -25,9 +25,9 @@ public class ModuleEventLogController {
     public StatusOperation saveLog(@RequestBody final ModuleEventLogDTO moduleEventLogDTO) {
         try {
             moduleEventLogService.saveLog(moduleEventLogDTO);
+            return new StatusOperation("Completed successfully");
         } catch (Exception e) {
-            throw new PreconditionFailed(e.getMessage());
+            throw new PreconditionFailedException(e.getMessage());
         }
-        return new StatusOperation("Completed successfully");
     }
 }

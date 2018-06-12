@@ -5,9 +5,17 @@ import vrp.exception.CreateInvalidObjectException;
 
 public class ModuleEventLogDTO {
 
+    //////////////////////////////////
+    // Calculated fields
+    //
+
     private String projectName;
     private String moduleName;
     private String textLog;
+
+    //////////////////////////////////
+    // Constructors
+    //
 
     protected ModuleEventLogDTO(){
     }
@@ -18,6 +26,10 @@ public class ModuleEventLogDTO {
         this.textLog = textLog;
         validateCreateObject();
     }
+
+    //////////////////////////////////
+    // Accessors
+    //
 
     public String getProjectName() {
         return projectName;
@@ -30,6 +42,10 @@ public class ModuleEventLogDTO {
     public String getTextLog() {
         return textLog;
     }
+
+    //////////////////////////////////
+    // Validate invariants fields
+    //
 
     protected void validateCreateObject(){
         validateTextLog();

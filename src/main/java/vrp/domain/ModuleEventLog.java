@@ -9,6 +9,10 @@ import java.util.Date;
 @Table(name = "logs", schema = "monitoring")
 public class ModuleEventLog {
 
+    //////////////////////////////////
+    // Calculated fields
+    //
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +27,10 @@ public class ModuleEventLog {
     @JoinColumn(name = "id_module")
     private Module module;
 
+    //////////////////////////////////
+    // Constructors
+    //
+
     protected ModuleEventLog() {
     }
 
@@ -33,11 +41,15 @@ public class ModuleEventLog {
         validateCreateObject();
     }
 
+    //////////////////////////////////
+    // Accessors
+    //
+
     public Long getId() {
         return id;
     }
 
-    protected void setId(final Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 
@@ -45,7 +57,7 @@ public class ModuleEventLog {
         return textLog;
     }
 
-    protected void setTextLog(final String textLog) {
+    protected void setTextLog(String textLog) {
         this.textLog = textLog;
     }
 
@@ -53,7 +65,7 @@ public class ModuleEventLog {
         return module;
     }
 
-    protected void setModule(final Module module) {
+    protected void setModule(Module module) {
         this.module = module;
     }
 
@@ -61,10 +73,15 @@ public class ModuleEventLog {
         return createdAt;
     }
 
-    protected void setCreatedAt(final Date createdAt) {
+    protected void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
+    //////////////////////////////////
+    // Validate invariants fields
+    //
+
+    @PostLoad
     private void validateCreateObject() {
         validateTextLog();
         validateCreatedDate();
@@ -87,10 +104,5 @@ public class ModuleEventLog {
         if (module == null) {
             throw new CreateInvalidObjectException("Module can not be null");
         }
-    }
-
-    @PostLoad
-    private void postLoad(){
-        validateCreateObject();
     }
 }
