@@ -36,7 +36,7 @@ public class MainController {
                                                       , @RequestParam("name_modules") final String modulesName){
        var mav = new ModelAndView();
          try{
-            projectService.saveProjectAndDependencyModules(projectName,modulesName);
+            projectService.saveProjectAndDependentModules(projectName,modulesName);
             mav.addObject("success_message", "Project added successfully");
         }catch(ResourceExistsException e ){
             mav.addObject("error_message", e.getMessage());

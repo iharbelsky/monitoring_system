@@ -27,7 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void saveProjectAndDependencyModules(final String projectName, final String modulesName) {
+    public void saveProjectAndDependentModules(final String projectName, final String modulesName) {
         validateRequestParams(projectName,modulesName);
         validateProjectIsExists(projectName);
         final var project = new Project(projectName);
@@ -50,14 +50,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     protected Set<String> fetchListByString(final String str){
        var set = List.of(str.split("\\r?\\n"))
-                             .stream()
-                             .map(obj-> StringUtils.trim(obj))
-                             .collect(Collectors.toSet());
+                            .stream()
+                            .map(obj-> StringUtils.trim(obj))
+                            .collect(Collectors.toSet());
        set.remove("");
        return set;
     }
 
-    protected void saveDependencyModules(Set<String> modulesName,Project project){
+    protected void saveDependencyModules(final Set<String> modulesName, final Project project){
         modulesName.stream()
                    .map(str->new Module(str,project))
                    .forEach(module->moduleRepository.save(module));

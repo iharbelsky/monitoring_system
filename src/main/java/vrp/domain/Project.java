@@ -56,11 +56,11 @@ public class Project {
     //
 
     @PostLoad
-    private void validateCreateObject(){
+    protected void validateCreateObject(){
         validateNameProject();
     }
 
-    private void validateNameProject(){
+    protected void validateNameProject(){
         if(StringUtils.isEmpty(nameProject)){
             throw new CreateInvalidObjectException("Name project can not be empty");
         }

@@ -69,18 +69,18 @@ public class Module {
     //
 
     @PostLoad
-    private void validateCreateObject(){
+    protected void validateCreateObject(){
         validateNameModule();
         validateProject();
     }
 
-    private void validateNameModule(){
+    protected void validateNameModule(){
         if(StringUtils.isEmpty(nameModule)){
             throw new CreateInvalidObjectException("Name module can not be empty");
         }
     }
 
-    private void validateProject(){
+    protected void validateProject(){
         if(project == null){
             throw new CreateInvalidObjectException("Project can not be empty");
         }

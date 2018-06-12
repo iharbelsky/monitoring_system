@@ -82,25 +82,25 @@ public class ModuleEventLog {
     //
 
     @PostLoad
-    private void validateCreateObject() {
+    protected void validateCreateObject() {
         validateTextLog();
         validateCreatedDate();
         validateModule();
     }
 
-    private void validateTextLog() {
+    protected void validateTextLog() {
         if (StringUtils.isEmpty(textLog)) {
             throw new CreateInvalidObjectException("Text log can not be empty");
         }
     }
 
-    private void validateCreatedDate() {
+    protected void validateCreatedDate() {
         if (createdAt == null) {
             throw new CreateInvalidObjectException("Date can not be null");
         }
     }
 
-    private void validateModule() {
+    protected void validateModule() {
         if (module == null) {
             throw new CreateInvalidObjectException("Module can not be null");
         }
