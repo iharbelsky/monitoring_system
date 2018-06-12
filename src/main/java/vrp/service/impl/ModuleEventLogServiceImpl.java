@@ -41,7 +41,6 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
 
     private Module safetyFetchModule(final ModuleEventLogDTO moduleEventLogDTO) {
 
-
         final var project = safetyFetchProject(moduleEventLogDTO);
         return safetyFetchModulesByProject(project).stream()
                                                    .filter(obj -> moduleEventLogDTO.getModuleName()
