@@ -29,8 +29,8 @@ public class ModuleEventLogControllerTest {
     @Test
     public void validateLogControllerPost() throws Exception {
         final var model = new ObjectMapper().writeValueAsString(new ModuleEventLogDTO("internet-shop"
-                                                                          , "controller"
-                                                                          , "{\"text\":\"Build Success\"}"));
+                                                                                     , "controller"
+                                                                                     , "{\"text\":\"Build Success\"}"));
         mvc.perform(post("/module_event/save").with(SecurityMockMvcRequestPostProcessors.csrf())
                                               .accept(MediaType.APPLICATION_JSON)
                                               .contentType(MediaType.APPLICATION_JSON)
