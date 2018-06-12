@@ -5,7 +5,7 @@
     <title>CreateNewProject</title>
 </head>
 <body>
-
+<h1>CREATE NEW PROJECT AND DEPENDENCY MODULES</h1>
 <span th:utext="${error_message}"></span>
 <span th:utext="${success_message}"></span>
 
@@ -13,13 +13,13 @@
         <table>
             <tr>
                 <td>Name project</td>
-                <td><input type = 'text' name="name_project"></td>
+                <td><input type = 'text' name="name_project" size="49"></td>
             </tr>
 
             <tr>
                 <td>Name modules</td>
                 <td>
-                    <textarea name="name_modules">
+                    <textarea name="name_modules" rows="10" cols="45">
                     </textarea>
                 </td>
             </tr>
