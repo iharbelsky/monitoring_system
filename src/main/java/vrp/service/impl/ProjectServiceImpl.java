@@ -1,5 +1,6 @@
 package vrp.service.impl;
 
+import org.pcollections.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -10,6 +11,7 @@ import vrp.exception.ResourceExistsException;
 import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.ProjectService;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,12 +29,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public void saveProjectAndDependentModules(final String projectName, final String modulesName) {
         validateRequestParams(projectName,modulesName);
         validateProjectIsExists(projectName);
         final var project = new Project(projectName);
         projectRepository.save(project);
-        saveDependentModules(fetchSetModulesByString(modulesName),project);
+        saveDependentModules(fetchSetModulesByString(modulesName), project);
     }
 
     protected void validateProjectIsExists(final String projectName){
@@ -50,16 +53,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     protected void saveDependentModules(final Set<String> modulesName, final Project project){
         modulesName.stream()
-                .map(str->new Module(str,project))
-                .forEach(module->moduleRepository.save(module));
+                   .map(str->new Module(str, project))
+                   .forEach(module->moduleRepository.save(module));
     }
 
-    protected Set<String> fetchSetModulesByString(final String str){
+    protected PSet<String> fetchSetModulesByString(final String str){
        var set = List.of(str.split("\\r?\\n"))
                             .stream()
                             .map(obj-> StringUtils.trim(obj))
                             .collect(Collectors.toSet());
        set.remove("");
-       return set;
+       return HashTreePSet.from(set);
     }
 }

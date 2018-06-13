@@ -1,5 +1,7 @@
 package vrp.service.impl;
 
+import org.pcollections.PVector;
+import org.pcollections.TreePVector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vrp.domain.ModuleEventLog;
@@ -12,7 +14,6 @@ import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.ModuleEventLogService;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class ModuleEventLogServiceImpl implements ModuleEventLogService {
@@ -53,7 +54,7 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
                                 .orElseThrow(() -> new ResourceNotFoundException("Project not Found"));
     }
 
-    protected List<Module> safetyFetchModulesByProject(final Project project){
-        return moduleRepository.findByProjectId(project.getId());
+    protected PVector<Module> safetyFetchModulesByProject(final Project project){
+        return TreePVector.from(moduleRepository.findByProjectId(project.getId()));
     }
 }

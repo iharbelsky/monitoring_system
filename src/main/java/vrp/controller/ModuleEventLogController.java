@@ -11,7 +11,7 @@ import vrp.exception.PreconditionFailedException;
 import vrp.service.ModuleEventLogService;
 
 @RestController
-@RequestMapping(value="/module_event")
+@RequestMapping(value = "/module_event")
 public class ModuleEventLogController {
 
     private final ModuleEventLogService moduleEventLogService;

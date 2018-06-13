@@ -38,9 +38,9 @@ public class MainController {
          try{
             projectService.saveProjectAndDependentModules(projectName,modulesName);
             mav.addObject("success_message", "Project added successfully");
-        }catch(ResourceExistsException e ){
-            mav.addObject("error_message", e.getMessage());
         }catch(InvalidRequestParams e){
+             mav.addObject("error_message", e.getMessage());
+        }catch(ResourceExistsException e ){
              mav.addObject("error_message", e.getMessage());
         }catch(Exception e){
             throw new PreconditionFailedException(e.getMessage());
