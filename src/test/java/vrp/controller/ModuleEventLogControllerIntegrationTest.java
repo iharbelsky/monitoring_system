@@ -48,7 +48,7 @@ public class ModuleEventLogControllerIntegrationTest {
                                                         , String.class);
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         final var logs = jdbcTemplate.query( SQL_QUERY
-                                           , (rs,Long) -> new ModuleEventLogDTO( rs.getString("name_project")
+                                           , (rs, Long) -> new ModuleEventLogDTO( rs.getString("name_project")
                                                                                , rs.getString("name_module")
                                                                                , rs.getString("text_log")) );
         Assert.assertEquals(1, logs.size());
@@ -67,7 +67,7 @@ public class ModuleEventLogControllerIntegrationTest {
                                                         , String.class);
         Assert.assertEquals(HttpStatus.PRECONDITION_FAILED, responseEntity.getStatusCode());
         final var logs = jdbcTemplate.query( SQL_QUERY
-                                           , (rs,Long) -> new ModuleEventLogDTO( rs.getString("name_project")
+                                           , (rs, Long) -> new ModuleEventLogDTO( rs.getString("name_project")
                                                                                , rs.getString("name_module")
                                                                                , rs.getString("text_log")) );
         Assert.assertEquals(0, logs.size());
