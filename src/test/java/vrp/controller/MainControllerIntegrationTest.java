@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -52,11 +51,11 @@ public class MainControllerIntegrationTest {
     @WithMockUser(roles = "USER")
     public void incorrectPostRequestAndSaveToDB() throws Exception{
         mvc.perform(post("/main/create_new_project").with(SecurityMockMvcRequestPostProcessors.csrf())
-                .accept(MediaType.TEXT_HTML)
-                .contentType(MediaType.TEXT_HTML)
-                .param("name_project", "internet-shop")
-                .param("name_modules", "new_module1\nnew_module2\n new_module3"))
-                .andExpect(status().isOk());
+                                                    .accept(MediaType.TEXT_HTML)
+                                                    .contentType(MediaType.TEXT_HTML)
+                                                    .param("name_project", "internet-shop")
+                                                    .param("name_modules", "new_module1\nnew_module2\n new_module3"))
+                                                    .andExpect(status().isOk());
         final var modules = jdbcTemplate.query(SQL_QUERY, (rs,Long)-> new String(rs.getString("name_module")));
         Assert.assertEquals(0, modules.size());
     }
