@@ -13,7 +13,6 @@ import vrp.repository.ProjectRepository;
 import vrp.service.ProjectService;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public void saveProjectAndDependentModules(final String projectName, final String modulesName) {
-        validateRequestParams(projectName,modulesName);
+        validateRequestParams(projectName, modulesName);
         validateProjectIsExists(projectName);
         final var project = new Project(projectName);
         projectRepository.save(project);
@@ -51,7 +50,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
-    protected void saveDependentModules(final Set<String> modulesName, final Project project){
+    protected void saveDependentModules(final PSet<String> modulesName, final Project project){
         modulesName.stream()
                    .map(str->new Module(str, project))
                    .forEach(module->moduleRepository.save(module));

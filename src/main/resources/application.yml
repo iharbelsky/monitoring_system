@@ -21,9 +21,6 @@ spring:
     properties:
       hibernate.temp.use_jdbc_metadata_defaults: false
     flyway:
-        url: jdbc:postgresql://localhost:5432/monitoring_system
-        user: kbandarchyk
-        password: 123a456B
         locations: db/migration/postgres
 ---
 spring:

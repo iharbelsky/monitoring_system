@@ -21,7 +21,7 @@ public class MainController {
         this.projectService = projectService;
     }
 
-    @RequestMapping(value = {"/" , "/main"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
     public ModelAndView MainMenuController(){
         return new ModelAndView("main");
     }
@@ -36,7 +36,7 @@ public class MainController {
                                                       , @RequestParam("name_modules") final String modulesName){
        var mav = new ModelAndView();
          try{
-            projectService.saveProjectAndDependentModules(projectName,modulesName);
+            projectService.saveProjectAndDependentModules(projectName, modulesName);
             mav.addObject("success_message", "Project added successfully");
         }catch(InvalidRequestParams e){
              mav.addObject("error_message", e.getMessage());

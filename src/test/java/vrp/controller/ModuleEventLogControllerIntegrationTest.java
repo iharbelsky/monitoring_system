@@ -18,7 +18,8 @@ import vrp.dto.ModuleEventLogDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MonitoringApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(value = "classpath:/sql/delete_all_logs.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = { "classpath:/sql/delete_all_data.sql","classpath:/sql/insert_test_data.sql"}
+             , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class ModuleEventLogControllerIntegrationTest {
 
     @LocalServerPort
@@ -33,6 +34,7 @@ public class ModuleEventLogControllerIntegrationTest {
                                                                .append("INNER JOIN monitoring.projects ON projects.id=modules.id_project ")
                                                                .append("WHERE (logs.text_log->>'text') = 'Build Error.404'")
                                                                .toString();
+
     @Test
     public void correctPostRequestAndSaveToDB() throws Exception {
         final var restTemplate = new TestRestTemplate();
@@ -51,6 +53,7 @@ public class ModuleEventLogControllerIntegrationTest {
                                                                                , rs.getString("text_log")) );
         Assert.assertEquals(1, logs.size());
     }
+
     @Test
     public void incorrectPostRequestAndSaveToDB() throws Exception {
         final var restTemplate = new TestRestTemplate();
@@ -69,12 +72,14 @@ public class ModuleEventLogControllerIntegrationTest {
                                                                                , rs.getString("text_log")) );
         Assert.assertEquals(0, logs.size());
     }
+
     protected String getURI(){
         return new StringBuilder().append("http://localhost:")
                                   .append(port)
                                   .append("/module_event/save")
                                   .toString();
     }
+
     protected HttpHeaders getHttpHeaders() {
         final var headers = new HttpHeaders();
         final var plainCredentials = "user:user";

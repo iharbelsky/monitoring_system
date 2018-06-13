@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { MonitoringApplication.class })
+@ContextConfiguration(classes = {MonitoringApplication.class})
 @SpringBootTest
 public class ModuleEventLogServiceImplTest {
 
@@ -47,11 +47,11 @@ public class ModuleEventLogServiceImplTest {
         final var project = new Project("internet-shop");
         final var module = new Module("controller", project);
         final var log = new ModuleEventLog( "{\"text\":\"Build Error\"}"
-                               , new Date()
-                               , module);
+                                          , new Date()
+                                          , module);
         final var logDTO = new ModuleEventLogDTO( "internet-shop"
-                                     , "controller"
-                                     , "{\"text\":\"Build Error\"}");
+                                                , "controller"
+                                                , "{\"text\":\"Build Error\"}");
         when((projectRepository).findByNameProject(logDTO.getProjectName())).thenReturn(Optional.of(project));
         when((moduleRepository).findByProjectId(project.getId())).thenReturn(List.of(module));
         when((moduleEventLogRepository).save(log)).thenReturn(log);
