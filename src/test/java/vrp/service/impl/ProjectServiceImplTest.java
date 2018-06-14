@@ -12,9 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import vrp.MonitoringApplication;
 import vrp.domain.Project;
-import vrp.exception.InvalidRequestParams;
+import vrp.exception.InvalidRequestParamsException;
 import vrp.exception.ResourceExistsException;
-import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import java.util.Optional;
 import static org.mockito.Mockito.*;
@@ -68,7 +67,7 @@ public class ProjectServiceImplTest {
         assertEquals(expectedSet, projectService.fetchSetModulesNameByString(str));
     }
 
-    @Test(expected = InvalidRequestParams.class)
+    @Test(expected = InvalidRequestParamsException.class)
     public void validateRequestParamsTest(){
         final var projectName = "";
         final var moduleName = "controller\nsecurity\nservice\ncontroller";

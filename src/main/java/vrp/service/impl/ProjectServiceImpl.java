@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 import vrp.domain.Module;
 import vrp.domain.Project;
-import vrp.exception.InvalidRequestParams;
+import vrp.exception.InvalidRequestParamsException;
 import vrp.exception.ResourceExistsException;
 import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
@@ -43,7 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     protected void validateRequestParams(final String projectName, final String moduleName){
         if(StringUtils.isEmpty(projectName)|| StringUtils.isEmpty(StringUtils.trim(moduleName))){
-            throw new InvalidRequestParams("Project name or module name cannot be is empty");
+            throw new InvalidRequestParamsException("Project name or module name cannot be is empty");
         }
     }
 
