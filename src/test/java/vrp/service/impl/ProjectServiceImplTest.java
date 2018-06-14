@@ -31,8 +31,6 @@ public class ProjectServiceImplTest {
     @Spy
     private ProjectRepository projectRepository;
 
-    @Spy
-    private ModuleRepository moduleRepository;
 
     @Before
     public void before(){
@@ -46,11 +44,9 @@ public class ProjectServiceImplTest {
         final var project = new Project(projectName);
         when((projectRepository).findByNameProject(projectName)).thenReturn(Optional.empty());
         when((projectRepository).save(project)).thenReturn(project);
-        when((moduleRepository).save(notNull())).thenReturn(notNull());
         projectService.saveProjectAndDependentModules(projectName, moduleName);
         verify(projectRepository, times(1)).findByNameProject(projectName);
         verify(projectRepository, times(1)).save(notNull());
-        verify(moduleRepository, times(3)).save(notNull());
     }
 
     @Test(expected = ResourceExistsException.class)
@@ -69,7 +65,7 @@ public class ProjectServiceImplTest {
         final var expectedSet = HashTreePSet.singleton("controller")
                                             .plus("service")
                                             .plus("security");
-        assertEquals(expectedSet, projectService.fetchSetModulesByString(str));
+        assertEquals(expectedSet, projectService.fetchSetModulesNameByString(str));
     }
 
     @Test(expected = InvalidRequestParams.class)

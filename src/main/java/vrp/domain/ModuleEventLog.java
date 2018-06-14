@@ -27,6 +27,7 @@ public class ModuleEventLog {
     @JoinColumn(name = "id_module")
     private Module module;
 
+
     //////////////////////////////////
     // Constructors
     //
@@ -40,6 +41,7 @@ public class ModuleEventLog {
         this.module = module;
         validateCreateObject();
     }
+
 
     //////////////////////////////////
     // Accessors
@@ -76,6 +78,7 @@ public class ModuleEventLog {
     protected void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
 
     //////////////////////////////////
     // Validate invariants fields

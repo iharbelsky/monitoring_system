@@ -13,6 +13,7 @@ public class ModuleEventLogDTO {
     private String moduleName;
     private String textLog;
 
+
     //////////////////////////////////
     // Constructors
     //
@@ -26,6 +27,7 @@ public class ModuleEventLogDTO {
         this.textLog = textLog;
         validateCreateObject();
     }
+
 
     //////////////////////////////////
     // Accessors
@@ -42,6 +44,7 @@ public class ModuleEventLogDTO {
     public String getTextLog() {
         return textLog;
     }
+
 
     //////////////////////////////////
     // Validate invariants fields

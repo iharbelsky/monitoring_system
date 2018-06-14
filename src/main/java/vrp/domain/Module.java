@@ -23,6 +23,7 @@ public class Module {
     @JoinColumn(name = "id_project")
     private Project project;
 
+
     //////////////////////////////////
     // Constructors
     //
@@ -30,11 +31,16 @@ public class Module {
     protected Module() {
     }
 
+    public Module(String nameModule){
+        this.nameModule = nameModule;
+    }
+
     public Module(String nameModule, Project project) {
         this.nameModule = nameModule;
         this.project = project;
         validateCreateObject();
     }
+
 
     //////////////////////////////////
     // Accessors
@@ -63,6 +69,7 @@ public class Module {
     protected void setProject(Project project) {
         this.project = project;
     }
+
 
     //////////////////////////////////
     // Validate invariants fields

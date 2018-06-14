@@ -11,7 +11,6 @@ import vrp.exception.ResourceExistsException;
 import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.ProjectService;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,13 +27,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    @Transactional
     public void saveProjectAndDependentModules(final String projectName, final String modulesName) {
         validateRequestParams(projectName, modulesName);
         validateProjectIsExists(projectName);
-        final var project = new Project(projectName);
+        final var project = new Project(projectName, fetchSetModule(fetchSetModulesNameByString(modulesName)));
         projectRepository.save(project);
-        saveDependentModules(fetchSetModulesByString(modulesName), project);
     }
 
     protected void validateProjectIsExists(final String projectName){
@@ -50,14 +47,14 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
-    protected void saveDependentModules(final PSet<String> modulesName, final Project project){
-        modulesName.stream()
-                   .map(str->new Module(str, project))
-                   .forEach(module->moduleRepository.save(module));
+    protected PSet<Module> fetchSetModule(final PSet<String> modulesName){
+        return HashTreePSet.from(modulesName.stream()
+                           .map(moduleName->new Module(moduleName))
+                           .collect(Collectors.toSet()));
     }
 
-    protected PSet<String> fetchSetModulesByString(final String str){
-       var set = List.of(str.split("\\r?\\n"))
+    protected PSet<String> fetchSetModulesNameByString(final String str){
+       var set = List.of(str.split("\\r?\\n"))              //TODO
                             .stream()
                             .map(obj-> StringUtils.trim(obj))
                             .collect(Collectors.toSet());

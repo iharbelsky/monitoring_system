@@ -3,6 +3,7 @@ package vrp.domain;
 import org.thymeleaf.util.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "projects", schema = "monitoring")
@@ -19,6 +20,11 @@ public class Project {
     @Column(name = "name_project")
     private String nameProject;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_project")
+    private Set<Module> modulesProject;
+
+
     //////////////////////////////////
     // Constructors
     //
@@ -30,6 +36,12 @@ public class Project {
         this.nameProject = nameProject;
         validateCreateObject();
     }
+
+    public Project(String nameProject, Set<Module> modulesProject){
+        this.nameProject = nameProject;
+        this.modulesProject = modulesProject;
+    }
+
 
     //////////////////////////////////
     // Accessors
@@ -50,6 +62,15 @@ public class Project {
     protected void setNameProject(String nameProject) {
         this.nameProject = nameProject;
     }
+
+    public Set<Module> getModulesProject() {
+        return modulesProject;
+    }
+
+    protected void setModulesProject(Set<Module> modulesProject) {
+        this.modulesProject = modulesProject;
+    }
+
 
     //////////////////////////////////
     // Validate invariants fields
