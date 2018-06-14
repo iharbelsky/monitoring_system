@@ -35,7 +35,7 @@ public class MainController {
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.POST)
     public ModelAndView CreateNewProjectPostController( @RequestParam("name_project") final String projectName
                                                       , @RequestParam("name_modules") final String modulesName){
-        var mav = new ModelAndView();
+        final var mav = new ModelAndView();
         projectService.saveProjectAndDependentModules(projectName, modulesName);
         mav.addObject("success_message", "Project added successfully");
         mav.setViewName("create_new_project");
@@ -44,7 +44,7 @@ public class MainController {
 
     @ExceptionHandler(ResourceExistsException.class)
     protected ModelAndView handleResourceExistsException(ResourceExistsException e){
-        var mav = new ModelAndView();
+        final var mav = new ModelAndView();
         mav.addObject("error_message", e.getMessage());
         mav.setViewName("create_new_project");
         return mav;
@@ -52,7 +52,7 @@ public class MainController {
 
     @ExceptionHandler(InvalidRequestParamsException.class)
     protected ModelAndView handleInvalidRequestParamsException(InvalidRequestParamsException e){
-        var mav = new ModelAndView();
+        final var mav = new ModelAndView();
         mav.addObject("error_message", e.getMessage());
         mav.setViewName("create_new_project");
         return mav;
