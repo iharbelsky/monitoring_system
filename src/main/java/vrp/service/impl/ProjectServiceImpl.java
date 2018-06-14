@@ -49,8 +49,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     protected PSet<Module> fetchSetModule(final PSet<String> modulesName){
         return HashTreePSet.from(modulesName.stream()
-                           .map(moduleName->new Module(moduleName))
-                           .collect(Collectors.toSet()));
+                                            .map(moduleName->new Module(moduleName))
+                                            .collect(Collectors.toSet()));
     }
 
     protected PSet<String> fetchSetModulesNameByString(final String str){
