@@ -19,7 +19,7 @@ public class Module {
     @Column(name = "name_module")
     private String nameModule;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_project")
     private Project project;
 

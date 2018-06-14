@@ -8,7 +8,6 @@ import vrp.domain.Module;
 import vrp.domain.Project;
 import vrp.exception.InvalidRequestParamsException;
 import vrp.exception.ResourceExistsException;
-import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.ProjectService;
 import java.util.List;
@@ -18,12 +17,10 @@ import java.util.stream.Collectors;
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final ModuleRepository moduleRepository;
 
     @Autowired
-    public ProjectServiceImpl(final ProjectRepository projectRepository, final ModuleRepository moduleRepository){
+    public ProjectServiceImpl(final ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
-        this.moduleRepository = moduleRepository;
     }
 
     @Override
