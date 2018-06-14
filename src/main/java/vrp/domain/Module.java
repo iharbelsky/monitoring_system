@@ -33,6 +33,7 @@ public class Module {
 
     public Module(String nameModule){
         this.nameModule = nameModule;
+        validateCreateObject();
     }
 
     public Module(String nameModule, Project project) {
@@ -78,18 +79,11 @@ public class Module {
     @PostLoad
     protected void validateCreateObject(){
         validateNameModule();
-        validateProject();
     }
 
     protected void validateNameModule(){
         if(StringUtils.isEmpty(nameModule)){
             throw new CreateInvalidObjectException("Name module can not be empty");
-        }
-    }
-
-    protected void validateProject(){
-        if(project == null){
-            throw new CreateInvalidObjectException("Project can not be empty");
         }
     }
 }

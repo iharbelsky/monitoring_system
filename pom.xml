@@ -136,6 +136,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.1.1</version>
+                <configuration>
+
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -148,55 +156,32 @@
     <profiles>
         <profile>
             <id>development</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>5.1.1</version>
-                        <configuration>
-                            <url>jdbc:postgresql://localhost:5432/monitoring_system</url>
-                            <user>kbandarchyk</user>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <activatedProperties>development</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>production</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>5.1.1</version>
-                        <configuration>
-                            <url>jdbc:postgresql://localhost:5432/monitoring_system_prod</url>
-                            <user>kbandarchyk</user>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <activatedProperties>production</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>5.1.1</version>
-                        <configuration>
-                            <url>jdbc:postgresql://localhost:5432/monitoring_system_test</url>
-                            <user>kbandarchyk</user>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <activatedProperties>test</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
         </profile>
     </profiles>
-
-
 </project>
 
 

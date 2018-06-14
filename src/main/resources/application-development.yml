@@ -1,4 +1,5 @@
 spring:
+  profiles: development
   security:
     user:
       name: user
@@ -9,7 +10,7 @@ spring:
     database: org.hibernate.dialect.PostgreSQLDialect
     username: kbandarchyk
     password: 123a456B
-    url: jdbc:postgresql://localhost:5432/monitoring_system_test
+    url: jdbc:postgresql://localhost:5432/monitoring_system
     hikari:
       data-source-properties: stringtype=unspecified
   jpa:
