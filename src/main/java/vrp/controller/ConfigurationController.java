@@ -13,27 +13,27 @@ import vrp.exception.ResourceExistsException;
 import vrp.service.ProjectService;
 
 @Controller
-public class MainController {
+public class ConfigurationController {
 
     private final ProjectService projectService;
 
     @Autowired
-    public MainController(final ProjectService projectService){
+    public ConfigurationController(final ProjectService projectService){
         this.projectService = projectService;
     }
 
     @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
-    public ModelAndView MainMenuController(){
+    public ModelAndView mainMenuController(){
         return new ModelAndView("main");
     }
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.GET)
-    public ModelAndView CreateNewProjectGetController(){
+    public ModelAndView createNewProjectGetController(){
         return new ModelAndView("create_new_project");
     }
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.POST)
-    public ModelAndView CreateNewProjectPostController( @RequestParam("name_project") final String projectName
+    public ModelAndView createNewProjectPostController( @RequestParam("name_project") final String projectName
                                                       , @RequestParam("name_modules") final String modulesName){
         final var mav = new ModelAndView();
         projectService.saveProjectAndDependentModules(projectName, modulesName);

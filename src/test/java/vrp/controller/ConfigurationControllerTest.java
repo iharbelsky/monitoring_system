@@ -15,14 +15,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MainController.class)
-public class MainControllerTest {
+@WebMvcTest(ConfigurationController.class)
+public class ConfigurationControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private MainController mainController;
+    private ConfigurationController configurationController;
 
     @WithMockUser(roles = "USER")
     @Test

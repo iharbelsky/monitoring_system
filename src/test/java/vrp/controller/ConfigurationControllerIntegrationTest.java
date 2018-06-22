@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = MonitoringApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql( value={"classpath:/sql/delete_all_data.sql","classpath:/sql/insert_test_data.sql"}
     , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-public class MainControllerIntegrationTest {
+public class ConfigurationControllerIntegrationTest {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -43,7 +43,7 @@ public class MainControllerIntegrationTest {
                                                     .param("name_project", "new_project")
                                                     .param("name_modules", "new_module1\nnew_module2\n new_module3"))
                                                     .andExpect(status().isOk());
-        final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> new String(rs.getString("name_module")));
+        final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> rs.getString("name_module"));
         Assert.assertEquals(3, modules.size());
     }
 
@@ -56,7 +56,7 @@ public class MainControllerIntegrationTest {
                                                     .param("name_project", "internet-shop")
                                                     .param("name_modules", "new_module1\nnew_module2\n new_module3"))
                                                     .andExpect(status().isOk());
-        final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> new String(rs.getString("name_module")));
+        final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> rs.getString("name_module"));
         Assert.assertEquals(0, modules.size());
     }
 }
