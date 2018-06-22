@@ -41,10 +41,10 @@ public class ProjectServiceImplTest {
         final var projectName = "internet-shop_new";
         final var moduleName = "controller\nsecurity\nservice\ncontroller";
         final var project = new Project(projectName);
-        when((projectRepository).findByNameProject(projectName)).thenReturn(Optional.empty());
+        when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.empty());
         when((projectRepository).save(project)).thenReturn(project);
         projectService.saveProjectAndDependentModules(projectName, moduleName);
-        verify(projectRepository, times(1)).findByNameProject(projectName);
+        verify(projectRepository, times(1)).findByProjectName(projectName);
         verify(projectRepository, times(1)).save(notNull());
     }
 
@@ -53,9 +53,9 @@ public class ProjectServiceImplTest {
         final var projectName = "internet-shop_new";
         final var moduleName = "controller\nsecurity\nservice\ncontroller";
         final var project = new Project(projectName);
-        when((projectRepository).findByNameProject(projectName)).thenReturn(Optional.of(project));
+        when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.of(project));
         projectService.saveProjectAndDependentModules(projectName, moduleName);
-        verify(projectRepository, times(1)).findByNameProject(projectName);
+        verify(projectRepository, times(1)).findByProjectName(projectName);
     }
 
     @Test

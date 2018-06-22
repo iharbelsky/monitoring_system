@@ -18,11 +18,11 @@ public class Project {
     private Long id;
 
     @Column(name = "name_project")
-    private String nameProject;
+    private String projectName;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="id_project")
-    private Set<Module> modulesProject;
+    private Set<Module> projectModules;
 
 
     //////////////////////////////////
@@ -32,14 +32,14 @@ public class Project {
     protected Project() {
     }
 
-    public Project(String nameProject) {
-        this.nameProject = nameProject;
+    public Project(String projectName) {
+        this.projectName = projectName;
         validateCreateObject();
     }
 
-    public Project(String nameProject, Set<Module> modulesProject){
-        this.nameProject = nameProject;
-        this.modulesProject = modulesProject;
+    public Project(String projectName, Set<Module> projectModules){
+        this.projectName = projectName;
+        this.projectModules = projectModules;
     }
 
 
@@ -55,20 +55,20 @@ public class Project {
         this.id = id;
     }
 
-    public String getNameProject() {
-        return nameProject;
+    public String getProjectName() {
+        return projectName;
     }
 
-    protected void setNameProject(String nameProject) {
-        this.nameProject = nameProject;
+    protected void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public Set<Module> getModulesProject() {
-        return modulesProject;
+    public Set<Module> getProjectModules() {
+        return projectModules;
     }
 
-    protected void setModulesProject(Set<Module> modulesProject) {
-        this.modulesProject = modulesProject;
+    protected void setProjectModules(Set<Module> projectModules) {
+        this.projectModules = projectModules;
     }
 
 
@@ -82,7 +82,7 @@ public class Project {
     }
 
     protected void validateNameProject(){
-        if(StringUtils.isEmpty(nameProject)){
+        if(StringUtils.isEmpty(projectName)){
             throw new CreateInvalidObjectException("Name project can not be empty");
         }
     }

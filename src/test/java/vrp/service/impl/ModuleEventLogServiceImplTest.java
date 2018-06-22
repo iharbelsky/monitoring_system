@@ -52,7 +52,7 @@ public class ModuleEventLogServiceImplTest {
         final var logDTO = new ModuleEventLogDTO( "internet-shop"
                                                 , "controller"
                                                 , "{\"text\":\"Build Error\"}");
-        when((projectRepository).findByNameProject(logDTO.getProjectName())).thenReturn(Optional.of(project));
+        when((projectRepository).findByProjectName(logDTO.getProjectName())).thenReturn(Optional.of(project));
         when((moduleRepository).findByProjectId(project.getId())).thenReturn(List.of(module));
         when((moduleEventLogRepository).save(log)).thenReturn(log);
         moduleEventLogService.saveLog(logDTO);

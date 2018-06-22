@@ -5,5 +5,5 @@ import vrp.domain.Project;
 import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    Optional<Project> findByNameProject(String nameProject);
+    Optional<Project> findByProjectName(String projectName);
 }

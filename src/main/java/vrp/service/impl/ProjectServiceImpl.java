@@ -32,7 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     protected void validateProjectIsExists(final String projectName){
-       if(projectRepository.findByNameProject(projectName)
+       if(projectRepository.findByProjectName(projectName)
                            .isPresent()){
            throw new ResourceExistsException("This project is already exists");
        }
@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
     protected PSet<String> fetchSetModulesNameByString(final String str){
        var set = List.of(str.split("\\r?\\n"))              //TODO
                             .stream()
-                            .map(obj-> StringUtils.trim(obj))
+                            .map(StringUtils::trim)
                             .collect(Collectors.toSet());
        set.remove("");
        return HashTreePSet.from(set);

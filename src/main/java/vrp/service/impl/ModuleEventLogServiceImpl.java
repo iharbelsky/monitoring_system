@@ -44,13 +44,13 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
         final var project = safetyFetchProject(moduleEventLogDTO);
         return safetyFetchModulesByProject(project).stream()
                                                    .filter(obj -> moduleEventLogDTO.getModuleName()
-                                                                                   .equals(obj.getNameModule()))
+                                                                                   .equals(obj.getModuleName()))
                                                    .findFirst()
                                                    .orElseThrow(() -> new ResourceNotFoundException("Module not found"));
     }
 
     protected Project safetyFetchProject(final ModuleEventLogDTO moduleEventLogDTO){
-        return projectRepository.findByNameProject(moduleEventLogDTO.getProjectName())
+        return projectRepository.findByProjectName(moduleEventLogDTO.getProjectName())
                                 .orElseThrow(() -> new ResourceNotFoundException("Project not Found"));
     }
 

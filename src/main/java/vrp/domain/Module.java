@@ -17,7 +17,7 @@ public class Module {
     private Long id;
 
     @Column(name = "name_module")
-    private String nameModule;
+    private String moduleName;
 
     @ManyToOne
     @JoinColumn(name = "id_project")
@@ -31,13 +31,13 @@ public class Module {
     protected Module() {
     }
 
-    public Module(String nameModule){
-        this.nameModule = nameModule;
+    public Module(String moduleName){
+        this.moduleName = moduleName;
         validateCreateObject();
     }
 
-    public Module(String nameModule, Project project) {
-        this.nameModule = nameModule;
+    public Module(String moduleName, Project project) {
+        this.moduleName = moduleName;
         this.project = project;
         validateCreateObject();
     }
@@ -55,12 +55,12 @@ public class Module {
         this.id = id;
     }
 
-    public String getNameModule() {
-        return nameModule;
+    public String getModuleName() {
+        return moduleName;
     }
 
-    protected void setNameModule(String nameModule) {
-        this.nameModule = nameModule;
+    protected void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
     }
 
     public Project getProject() {
@@ -82,7 +82,7 @@ public class Module {
     }
 
     protected void validateNameModule(){
-        if(StringUtils.isEmpty(nameModule)){
+        if(StringUtils.isEmpty(moduleName)){
             throw new CreateInvalidObjectException("Name module can not be empty");
         }
     }
