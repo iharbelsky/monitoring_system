@@ -36,7 +36,7 @@ public class ConfigurationController {
     public ModelAndView createNewProjectPostController( @RequestParam("name_project") final String projectName
                                                       , @RequestParam("name_modules") final String modulesName){
         final var mav = new ModelAndView();
-        projectService.saveProjectAndDependentModules(projectName, modulesName);
+        projectService.saveProject(projectName, modulesName);
         mav.addObject("success_message", "Project added successfully");
         mav.setViewName("create_new_project");
         return mav;

@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void saveProjectAndDependentModules(final String projectName, final String modulesName) {
+    public void saveProject(final String projectName, final String modulesName) {
         validateRequestParams(projectName, modulesName);
         validateProjectIsExists(projectName);
         final var project = new Project(projectName, fetchSetModule(fetchSetModulesNameByString(modulesName)));
