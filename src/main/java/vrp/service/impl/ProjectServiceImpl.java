@@ -1,9 +1,9 @@
 package vrp.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.pcollections.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.StringUtils;
 import vrp.domain.Module;
 import vrp.domain.Project;
 import vrp.exception.InvalidRequestParamsException;

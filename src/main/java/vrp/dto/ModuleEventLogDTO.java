@@ -1,6 +1,6 @@
 package vrp.dto;
 
-import org.thymeleaf.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 
 public class ModuleEventLogDTO {

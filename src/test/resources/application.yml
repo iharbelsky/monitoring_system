@@ -15,3 +15,5 @@ spring:
   jpa:
     properties:
       hibernate.temp.use_jdbc_metadata_defaults: false
+server:
+  port: 8687

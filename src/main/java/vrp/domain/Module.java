@@ -1,6 +1,6 @@
 package vrp.domain;
 
-import org.thymeleaf.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 import javax.persistence.*;
 
