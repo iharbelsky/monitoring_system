@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CreateNewProject</title>
+
     <style>
          .error{
              color: red;
@@ -10,8 +11,17 @@
          .success{
              color: greenyellow;
          }
-
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#addMore").click(function (e) {
+                e.preventDefault();
+                $("#fieldList").append("<p><input type='text' name='module_names[]' size='30'></p>");
+            });
+        });
+    </script>
 </head>
 <body>
 <h1>CREATE NEW PROJECT AND DEPENDENT MODULES</h1>
@@ -21,22 +31,21 @@
         <table>
             <tr>
                 <td>Name project</td>
-                <td><input type = 'text' name="name_project" size="49"></td>
+                <td><input type = 'text' name="project_name" size="30"></td>
             </tr>
-
             <tr>
+                <td>Module names</td>
                 <td>
-                    <p>Name modules</p>
-                    <p>(Each module </p>
-                    <p>with a new line)</p>
-                </td>
-                <td>
-                    <textarea name="name_modules" rows="10" cols="45">
-                    </textarea>
+                    <div id="fieldList">
+                        <p>
+                            <input type="text" name="module_names[]" size="30">
+                        </p>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" th:value="Submit"></td>
+                <td><button id="addMore">Add more</button></td>
+                <td><input type="submit" th:value="Submit"></td>
             </tr>
         </table>
     </form>
