@@ -2,31 +2,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Security</title>
+    <style>
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 360px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+        .form input {
+            font-family: sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form input[type=submit] {
+            font-family: sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: deepskyblue;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .error_message {
+            margin: 15px 0 0;
+            color: red;
+            font-size: 15px;
+        }
+        .login-page .message {
+            margin: 15px 0 10px;
+            color: darkslategray;
+            font-size: 24px;
+            text-align: center;
+        }
+        body {
+            background: radial-gradient(gray, white);
+        }
+    </style>
 </head>
 <body>
-<h1>Enter your login and password</h1>
-<div class="center" th:if="${param.error}">
-    Invalid username and password.
-</div>
-    <form th:action="@{/login}" method="post">
-        <table>
-            <tr>
-                <td>Login:</td>
-                <td><input type="text" name="username"></td>
-            </tr>
-
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-
-            <tr>
-                <td colspan="2"><input type="submit" value="Log in"></td>
-            </tr>
-        </table>
-    </form>
-    <div class="center" th:if="${param.logout}">
-        You have been logged out.
+<div class="login-page">
+    <div class="message">Sign in to Monitoring System</div>
+    <div class="form">
+        <div class="error_message" th:if="${param.error}">
+            Incorrect username or password
+        </div>
+        <form class="login-form" th:action="@{/login}" method="post">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <input type="submit" value="Sign in"/>
+        </form>
+        <div class="center" th:if="${param.logout}">
+            You have been logged out.
+        </div>
     </div>
+</div>
 </body>
 </html>

@@ -1,12 +1,31 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>MainPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Main Page</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to monitoring system application!</h1>
-    <h2>Select the necessary menu item</h2>
-    <a href="/main/create_new_project">Create New Project</a>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Welcome to the Monitoring System</h1>
+        <p>This application serves for obtaining logs from various projects and their further storage</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5" align="center">
+            <h2>Create project and dependent modules</h2>
+            <p>In this menu, a new project and its dependent modules are created</p>
+            <p><a class="btn btn-secondary" href="/main/create_new_project" role="button">View details »</a></p>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br>
+    <hr>
+    <footer>
+        <p>© VRP Consulting 2018</p>
+    </footer>
+</div>
 </body>
 </html>
