@@ -42,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
         if(StringUtils.isEmpty(projectName)){
             throw new InvalidRequestParamsException("Project name can't be is empty");
         }
-        if(moduleNames.length == 0 || fetchSetModuleNamesByArray(moduleNames).size() == 0){
+        if(moduleNames == null || moduleNames.length == 0 || fetchSetModuleNamesByArray(moduleNames).size() == 0){
             throw new InvalidRequestParamsException("At least one module must be specified");
         }
     }

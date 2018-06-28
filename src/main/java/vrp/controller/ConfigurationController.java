@@ -34,7 +34,7 @@ public class ConfigurationController {
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.POST)
     public ModelAndView createNewProjectPostController( @RequestParam("project_name") final String projectName
-                                                      , @RequestParam("module_names[]") final String [] moduleNames){
+                                                      , @RequestParam(value = "module_names[]", required = false) final String [] moduleNames){
         final var mav = new ModelAndView();
         projectService.saveProject(projectName, moduleNames);
         mav.addObject("success_message", "Project added successfully");
