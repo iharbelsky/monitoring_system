@@ -8,9 +8,22 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script>
         $(function () {
-            $("#addMore").click(function (e) {
-                e.preventDefault();
-                $("#fieldList").append("<input type='text' class='form-control' name='module_names[]'>");
+            $('#fieldList').on("click", ".delete-button", function () {
+                $(this).closest(".input-group").remove();
+                return false;
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#addMore").click(function () {
+                $("#fieldList").append("<div class='input-group'>\n" +
+                                       "<input type='text' class='form-control' name='module_names[]'/>\n" +
+                                       "<span class='input-group-btn'>\n" +
+                                       "<button class='btn btn-default delete-button' type='button'>Delete</button>\n" +
+                                       "</span>\n" +
+                                       "</div>");
+                return false;
             });
         });
     </script>
@@ -30,11 +43,19 @@
                 <div class="form-group">
                     <label>Module names</label>
                     <div id="fieldList">
-                        <input type="text" class="form-control" name="module_names[]">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="module_names[]"/>
+                            <span class="input-group-btn">
+                            <button class="btn btn-default delete-button" type="button">Delete</button>
+                        </span>
+                        </div>
                     </div>
                 </div>
                 <button id="addMore" class="btn btn-primary btn-sm custom-button">Add more</button>
                 <button type="submit" class="btn btn-primary btn-sm custom-button">Submit</button>
+                <button type="cancel" class="btn btn-primary btn-sm custom-button"
+                        onclick="window.location.replace('/main');return false;">Cancel
+                </button>
             </form>
         </div>
     </div>
