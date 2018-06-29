@@ -24,7 +24,10 @@ public class ConfigurationController {
 
     @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
     public ModelAndView mainMenuController(){
-        return new ModelAndView("main");
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("main");
+        mav.addObject("projects", projectService.fetchAllProjects());
+        return mav;
     }
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.GET)

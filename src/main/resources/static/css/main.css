@@ -1,0 +1,38 @@
+.container{
+    margin-top: 70px;
+}
+
+.custom-table{
+    border: 1px solid lightgray;
+}
+
+thead{
+    background-color: #E8E8E8;
+}
+
+.col1{
+    width: 20%;
+}
+
+.col2{
+    width: 50%;
+}
+
+.col3{
+    width: 30%;
+}
+
+.cell3{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-button{
+    margin-right : 10px;
+    width : 80px;
+}
+
+.custom-button{
+    margin-right : 50px;
+    width : 140px;
+}
