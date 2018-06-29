@@ -50,8 +50,8 @@ public class ConfigurationControllerTest {
         mvc.perform(post("/main/create_new_project").with(SecurityMockMvcRequestPostProcessors.csrf())
                                                     .accept(MediaType.TEXT_HTML)
                                                     .contentType(MediaType.TEXT_HTML)
-                                                    .param("name_project", "internet-shop")
-                                                    .param("name_modules", "controller" ))
+                                                    .param("project_name", "internet-shop")
+                                                    .param("module_names[]", "controller" ))
                                                     .andExpect(status().isOk());
     }
 }

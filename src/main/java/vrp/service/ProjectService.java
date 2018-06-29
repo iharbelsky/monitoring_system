@@ -1,5 +1,5 @@
 package vrp.service;
 
 public interface ProjectService {
-    void saveProject(String projectName, String moduleName);
+    void saveProject(String projectName, String [] moduleNames);
 }

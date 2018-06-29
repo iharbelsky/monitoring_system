@@ -39,11 +39,11 @@ public class ProjectServiceImplTest {
     @Test
     public void saveProjectAndDependentModulesTest(){
         final var projectName = "internet-shop_new";
-        final var moduleName = "controller\nsecurity\nservice\ncontroller";
+        final var moduleNames = new String []{"controller","service","security"};
         final var project = new Project(projectName);
         when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.empty());
         when((projectRepository).save(project)).thenReturn(project);
-        projectService.saveProject(projectName, moduleName);
+        projectService.saveProject(projectName, moduleNames);
         verify(projectRepository, times(1)).findByProjectName(projectName);
         verify(projectRepository, times(1)).save(notNull());
     }
@@ -51,26 +51,26 @@ public class ProjectServiceImplTest {
     @Test(expected = ResourceExistsException.class)
     public void saveExistProjectAndDependentModulesTest(){
         final var projectName = "internet-shop_new";
-        final var moduleName = "controller\nsecurity\nservice\ncontroller";
+        final var moduleNames = new String []{"controller","   service","  security"};
         final var project = new Project(projectName);
         when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.of(project));
-        projectService.saveProject(projectName, moduleName);
+        projectService.saveProject(projectName, moduleNames);
         verify(projectRepository, times(1)).findByProjectName(projectName);
     }
 
     @Test
     public void fetchSetModulesByStringTest(){
-        final var str = "controller\n    security   \nservice\n   controller";
+        final var moduleNames = new String []{"controller","   service","  security"};
         final var expectedSet = HashTreePSet.singleton("controller")
                                             .plus("service")
                                             .plus("security");
-        assertEquals(expectedSet, projectService.fetchSetModulesNameByString(str));
+        assertEquals(expectedSet, projectService.fetchSetModuleNamesByArray(moduleNames));
     }
 
     @Test(expected = InvalidRequestParamsException.class)
     public void validateRequestParamsTest(){
         final var projectName = "";
-        final var moduleName = "controller\nsecurity\nservice\ncontroller";
-        projectService.validateRequestParams(projectName,moduleName);
+        final var moduleNames = new String []{"controller","service","security"};
+        projectService.validateRequestParams(projectName, moduleNames);
     }
 }

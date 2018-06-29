@@ -24,10 +24,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void saveProject(final String projectName, final String modulesName) {
-        validateRequestParams(projectName, modulesName);
+    public void saveProject(final String projectName, final String [] moduleNames) {
+        validateRequestParams(projectName, moduleNames);
         validateProjectIsExists(projectName);
-        final var project = new Project(projectName, fetchSetModule(fetchSetModulesNameByString(modulesName)));
+        final var project = new Project(projectName, fetchSetModules(fetchSetModuleNamesByArray(moduleNames)));
         projectRepository.save(project);
     }
 
@@ -38,24 +38,26 @@ public class ProjectServiceImpl implements ProjectService {
        }
     }
 
-    protected void validateRequestParams(final String projectName, final String moduleName){
-        if(StringUtils.isEmpty(projectName)|| StringUtils.isEmpty(StringUtils.trim(moduleName))){
-            throw new InvalidRequestParamsException("Project name or module name cannot be is empty");
+    protected void validateRequestParams(final String projectName, final String [] moduleNames){
+        if(StringUtils.isEmpty(projectName)){
+            throw new InvalidRequestParamsException("Project name can't be is empty");
+        }
+        if(moduleNames == null || moduleNames.length == 0 || fetchSetModuleNamesByArray(moduleNames).size() == 0){
+            throw new InvalidRequestParamsException("At least one module must be specified");
         }
     }
 
-    protected PSet<Module> fetchSetModule(final PSet<String> modulesName){
-        return HashTreePSet.from(modulesName.stream()
-                                            .map(moduleName->new Module(moduleName))
+    protected PSet<Module> fetchSetModules(final PSet<String> moduleNames){
+        return HashTreePSet.from(moduleNames.stream()
+                                            .map(Module::new)
                                             .collect(Collectors.toSet()));
     }
 
-    protected PSet<String> fetchSetModulesNameByString(final String str){
-       var set = List.of(str.split("\\r?\\n"))              //TODO
-                            .stream()
-                            .map(StringUtils::trim)
-                            .collect(Collectors.toSet());
-       set.remove("");
-       return HashTreePSet.from(set);
+    protected PSet<String> fetchSetModuleNamesByArray(final String [] moduleNames){
+        final var setModuleNames = List.of(moduleNames).stream()
+                                                       .map(StringUtils::trim)
+                                                       .collect(Collectors.toSet());
+        setModuleNames.remove("");
+        return HashTreePSet.from(setModuleNames);
     }
 }

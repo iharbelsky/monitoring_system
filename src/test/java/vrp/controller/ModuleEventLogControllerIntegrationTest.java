@@ -18,8 +18,8 @@ import vrp.dto.ModuleEventLogDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MonitoringApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(value = { "classpath:/sql/delete_all_data.sql","classpath:/sql/insert_test_data.sql"}
-             , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql( value = { "classpath:/sql/delete_all_data.sql","classpath:/sql/insert_test_data.sql"}
+    , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class ModuleEventLogControllerIntegrationTest {
 
     @LocalServerPort

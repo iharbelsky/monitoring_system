@@ -40,8 +40,10 @@ public class ConfigurationControllerIntegrationTest {
         mvc.perform(post("/main/create_new_project").with(SecurityMockMvcRequestPostProcessors.csrf())
                                                     .accept(MediaType.TEXT_HTML)
                                                     .contentType(MediaType.TEXT_HTML)
-                                                    .param("name_project", "new_project")
-                                                    .param("name_modules", "new_module1\nnew_module2\n new_module3"))
+                                                    .param("project_name", "new_project")
+                                                    .param("module_names[]", "new_module1")
+                                                    .param("module_names[]", "new_module2")
+                                                    .param("module_names[]", "new_module3"))
                                                     .andExpect(status().isOk());
         final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> rs.getString("name_module"));
         Assert.assertEquals(3, modules.size());
@@ -53,8 +55,10 @@ public class ConfigurationControllerIntegrationTest {
         mvc.perform(post("/main/create_new_project").with(SecurityMockMvcRequestPostProcessors.csrf())
                                                     .accept(MediaType.TEXT_HTML)
                                                     .contentType(MediaType.TEXT_HTML)
-                                                    .param("name_project", "internet-shop")
-                                                    .param("name_modules", "new_module1\nnew_module2\n new_module3"))
+                                                    .param("project_name", "internet-shop")
+                                                    .param("module_names[]", "new_module1")
+                                                    .param("module_names[]", "new_module2")
+                                                    .param("module_names[]", "new_module3"))
                                                     .andExpect(status().isOk());
         final var modules = jdbcTemplate.query(SQL_QUERY, (rs, Long)-> rs.getString("name_module"));
         Assert.assertEquals(0, modules.size());
