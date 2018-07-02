@@ -21,4 +21,9 @@ public class AjaxController {
     public void deleteProject(@RequestParam("project_name") final String projectName){
         projectService.deleteProject(projectName);
     }
+
+    @RequestMapping(value = "/check-project", method = RequestMethod.POST)
+    public String checkExistsProject(@RequestParam("project_name") final String projectName){
+        return  projectService.checkProject(projectName);
+    }
 }

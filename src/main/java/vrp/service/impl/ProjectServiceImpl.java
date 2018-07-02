@@ -26,17 +26,25 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void saveProject(final String projectName, final String [] moduleNames) {
+    public void saveProject(final String projectName, final String description, final String [] moduleNames) {
         validateRequestParams(projectName, moduleNames);
         validateProjectIsExists(projectName);
 
-        final var project = new Project(projectName, fetchSetModules(fetchSetModuleNamesByArray(moduleNames)));
+        final var project = new Project(projectName, description, fetchSetModules(fetchSetModuleNamesByArray(moduleNames)));
         projectRepository.save(project);
     }
 
     @Override
     public PVector<ProjectDTO> fetchAllProjects() {
         return fetchListProjectDTObyProjectList(projectRepository.findAll());
+    }
+
+    @Override
+    public String checkProject(final String projectName) {
+       if(!projectRepository.findByProjectName(projectName).isPresent()){
+           return "ok";
+       }
+        return "Exists";
     }
 
     @Override

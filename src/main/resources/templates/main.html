@@ -13,19 +13,21 @@
           var flag = confirm("Do you really want to delete this project? This will result in the loss of all modules and logs of this project");
           if (flag === true) {
               var project_name = $(this).closest("td").prev().prev().text();
-              $.post(
-                  "/delete-project",
-                  {
-                      project_name: project_name
-                  },
-                  function() {location.reload()}
-              );
+              $.ajax({
+                  type: 'POST',
+                  url: 'delete-project',
+                  data: { project_name: project_name},
+                  success: function () {
+                      location.reload();
+                  }
+              });
           }
       });
       return false;
   })
 </script>
 <body>
+
 <div class="container">
     <table class="table custom-table">
         <thead>
@@ -57,5 +59,6 @@
     <button class="btn btn-danger custom-button" onclick="window.location.replace('/login');return false;">Cancel
     </button>
 </div>
+
 </body>
 </html>

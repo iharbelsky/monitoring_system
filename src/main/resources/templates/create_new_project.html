@@ -9,61 +9,86 @@
     <script>
         $(function () {
             $('#fieldList').on("click", ".delete-button", function () {
-                $(this).closest(".input-group").remove();
+                $(this).closest("tr").remove();
                 return false;
             });
         });
     </script>
     <script>
+     $(function () {
+         $("#addMore").click(function (){
+             $("#fieldList").append("<tr>\n" +
+                                    "<td class='col1'><input type='text' class='form-control' name='module_names[]'></td>\n" +
+                                    "<td class='col2'></td>\n" +
+                                    "<td class='col3'><button class='btn btn-danger custom-button delete-button'>Delete</button></td>\n" +
+                                    "</tr>");
+             return false;
+         });
+     });
+
+    </script>
+    <script>
         $(function () {
-            $("#addMore").click(function () {
-                $("#fieldList").append("<div class='input-group'>\n" +
-                                       "<input type='text' class='form-control' name='module_names[]'/>\n" +
-                                       "<span class='input-group-btn'>\n" +
-                                       "<button class='btn btn-default delete-button' type='button'>Delete</button>\n" +
-                                       "</span>\n" +
-                                       "</div>");
-                return false;
+            $('#project-name').keyup(function () {
+                var value = $('#project-name').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/check-project',
+                    data: { project_name: value},
+                    success: function (data) {
+                      if(data === "ok"){
+                          $("#check_result").css("background-color", "#25B328");
+                      }
+                        if(data === "Exists"){
+                            $("#check_result").css("background-color", "#DBB418");
+                        }
+                        $('.results').html(data);
+                    }
+                });
             });
-        });
+        })
     </script>
 </head>
 <body>
+
 <div class="container">
     <div class="custom-form">
-        <div class="form">
-            <h2>Creating project and dependent modules</h2>
+        <div class="answer-message">
             <span class="error_message" th:utext="${error_message}"></span>
             <span class="success_message" th:utext="${success_message}"></span>
-            <form action="/main/create_new_project" method="post">
-                <div class="form-group">
-                    <label>Project name</label>
-                    <input type="text" class="form-control" name="project_name">
-                </div>
-                <div class="form-group">
-                    <label>Module names</label>
-                    <div id="fieldList">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="module_names[]"/>
-                            <span class="input-group-btn">
-                            <button class="btn btn-default delete-button" type="button">Delete</button>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-                <button id="addMore" class="btn btn-primary btn-sm custom-button">Add more</button>
-                <button type="submit" class="btn btn-primary btn-sm custom-button">Submit</button>
-                <button class="btn btn-primary btn-sm custom-button"
-                        onclick="window.location.replace('/main');return false;">Cancel
-                </button>
-            </form>
         </div>
+        <form action="/main/create_new_project" method="post">
+            <div class="form-group project-name">
+                <table class="project-table">
+                    <tr>
+                        <td class='col1'><span>Project name</span></td>
+                        <td class='col2'><input type="text" id="project-name" class="form-control" name="project_name"></td>
+                        <td class='col3'><div id="check_result"><label class="results"></label></div></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group description">
+                <span>Description</span>
+                <textarea class="form-control" rows="5" name="description"></textarea>
+            </div>
+            <div class="form-group module-names">
+                <span>Modules</span>
+                <table class="module-table" id="fieldList">
+                    <tr>
+                        <td class='col1'><input type="text" class="form-control" name="module_names[]" ></td>
+                        <td class='col2'></td>
+                        <td class='col3'><button class="btn btn-danger custom-button delete-button">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+            </table>
+            <div class="buttons">
+                <button id="addMore" class="btn btn-success custom-button">Add new module</button>
+                <button class="btn btn-success custom-button" type="submit">Add new project</button>
+                <button class="btn btn-danger custom-button" onclick="window.location.replace('/main');return false;">Cancel</button>
+            </div>
+        </form>
     </div>
-    <br><br><br><br>
-    <hr>
-    <footer>
-        <p>© VRP Consulting 2018</p>
-    </footer>
 </div>
 </body>
 </html>

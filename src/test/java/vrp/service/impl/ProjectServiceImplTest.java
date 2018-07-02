@@ -39,11 +39,12 @@ public class ProjectServiceImplTest {
     @Test
     public void saveProjectAndDependentModulesTest(){
         final var projectName = "internet-shop_new";
+        final var description = "This is new internet shop";
         final var moduleNames = new String []{"controller","service","security"};
         final var project = new Project(projectName);
         when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.empty());
         when((projectRepository).save(project)).thenReturn(project);
-        projectService.saveProject(projectName, moduleNames);
+        projectService.saveProject(projectName, description, moduleNames);
         verify(projectRepository, times(1)).findByProjectName(projectName);
         verify(projectRepository, times(1)).save(notNull());
     }
@@ -51,13 +52,13 @@ public class ProjectServiceImplTest {
     @Test(expected = ResourceExistsException.class)
     public void saveExistProjectAndDependentModulesTest(){
         final var projectName = "internet-shop_new";
+        final var description = "This is new internet shop";
         final var moduleNames = new String []{"controller","   service","  security"};
         final var project = new Project(projectName);
         when((projectRepository).findByProjectName(projectName)).thenReturn(Optional.of(project));
-        projectService.saveProject(projectName, moduleNames);
+        projectService.saveProject(projectName, description, moduleNames);
         verify(projectRepository, times(1)).findByProjectName(projectName);
     }
-
     @Test
     public void fetchSetModulesByStringTest(){
         final var moduleNames = new String []{"controller","   service","  security"};

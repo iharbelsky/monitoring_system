@@ -1,44 +1,13 @@
+.container{
+    margin-top: 70px;
+}
+
 .custom-form {
     width: 960px;
-    padding: 8% 0 0;
+    padding-top: 3%;
     margin: auto;
-}
-
-.form {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 500px;
-    margin: 0 auto 100px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
-.form input {
-    font-family: sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    text-align: center;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.form input[type=submit] {
-    font-family: sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: deepskyblue;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .error_message {
@@ -53,7 +22,93 @@
     font-size: 15px;
 }
 
-.custom-button {
-    width: 190px;
-    margin-bottom: 10px;
+.custom-button{
+    margin-right : 10px;
+    width : 140px;
 }
+
+span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.answer-message{
+    height : 30px;
+    padding-left: 30px;
+}
+
+.project-name {
+    width : 86%;
+    margin-left: 36px;
+    margin-top: 20px;
+}
+
+.description{
+    width : 72%;
+    margin-left: 36px;
+}
+
+.module-names {
+    width: 100%;
+    margin-left: 36px;
+}
+
+.buttons {
+    width: 77%;
+    margin-left: 36px;
+    margin-bottom : 20px;
+}
+.delete-button {
+    width: 80px;
+}
+
+.module-table {
+    width: 100%;
+}
+
+.module-table .col1 {
+    width: 52%;
+    margin-bottom: 100px;
+    height: 50px;
+}
+
+.module-table .col2 {
+    width: 10%;
+    text-align: center;
+}
+
+.module-table .col3 {
+    width: 10%;
+    text-align: left;
+}
+
+.project-table{
+    width : 100%;
+}
+
+.project-table .col1 {
+    width: 15%;
+    margin-bottom: 100px;
+    height: 50px;
+}
+
+.project-table .col2 {
+    width: 69%;
+    text-align: center;
+}
+
+.project-table .col3 {
+    width: 16%;
+    text-align: center;
+}
+
+#check_result {
+    border-radius: 10px;
+    width: 50%;
+    height: 50%;
+    margin-left: 30px;
+    color: white;
+    font-size: 15px;
+}
+
+

@@ -46,6 +46,13 @@ public class Project {
         validateCreateObject();
     }
 
+    public Project(String projectName, String description, Set<Module> projectModules) {
+        this.projectName = projectName;
+        this.description = description;
+        this.projectModules = projectModules;
+        validateCreateObject();
+    }
+
 
     //////////////////////////////////
     // Accessors
