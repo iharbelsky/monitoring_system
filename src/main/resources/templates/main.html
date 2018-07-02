@@ -26,6 +26,15 @@
       return false;
   })
 </script>
+<script>
+    $(function () {
+        $('.crud-buttons').on("click",".view-button", function() {
+            var project_name = $(this).closest("td").prev().prev().text();
+            location.href = "/main/view_project/" + project_name;
+        });
+    })
+</script>
+
 <body>
 
 <div class="container">
@@ -44,7 +53,7 @@
                 <td th:text="${project.description}">...</td>
                 <td class="cell3">
                     <div class="crud-buttons">
-                        <button type="button" class="btn btn-light table-button">View</button>
+                        <button type="button" class="btn btn-light table-button view-button">View</button>
                         <button type="button" class="btn btn-light table-button">Edit</button>
                         <button type="button" class="btn btn-light table-button delete-button">Delete</button>
                     </div>

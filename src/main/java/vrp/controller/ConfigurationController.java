@@ -2,24 +2,25 @@ package vrp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vrp.exception.InvalidRequestParamsException;
 import vrp.exception.PreconditionFailedException;
 import vrp.exception.ResourceExistsException;
+import vrp.service.ModuleEventLogService;
 import vrp.service.ProjectService;
 
 @Controller
 public class ConfigurationController {
 
     private final ProjectService projectService;
+    private final ModuleEventLogService moduleEventLogService;
 
     @Autowired
-    public ConfigurationController(final ProjectService projectService){
+    public ConfigurationController( final ProjectService projectService
+                                  , final ModuleEventLogService moduleEventLogService){
         this.projectService = projectService;
+        this.moduleEventLogService = moduleEventLogService;
     }
 
     @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
@@ -43,6 +44,14 @@ public class ConfigurationController {
         projectService.saveProject(projectName, description, moduleNames);
         mav.addObject("success_message", "Project added successfully");
         mav.setViewName("create_new_project");
+        return mav;
+    }
+
+    @RequestMapping(value = "/main/view_project/{project_name}", method = RequestMethod.GET)
+    public ModelAndView viewProject( @PathVariable("project_name") final String projectName){
+        final var mav = new ModelAndView();
+        mav.addObject("logs", moduleEventLogService.fetchAllLogsDTOByProjectName(projectName));
+        mav.setViewName("view_project_logs");
         return mav;
     }
 

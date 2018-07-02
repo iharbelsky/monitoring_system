@@ -14,6 +14,8 @@ import vrp.repository.ModuleRepository;
 import vrp.repository.ProjectRepository;
 import vrp.service.ModuleEventLogService;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ModuleEventLogServiceImpl implements ModuleEventLogService {
@@ -40,6 +42,11 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
         moduleEventLogRepository.save(log);
     }
 
+    @Override
+    public PVector<ModuleEventLogDTO> fetchAllLogsDTOByProjectName(final String projectName) {
+       return fetchListLogsDTOByListLogs(moduleEventLogRepository.findAllByProjectName(projectName));
+    }
+
     protected Module safetyFetchModule(final ModuleEventLogDTO moduleEventLogDTO) {
         final var project = safetyFetchProject(moduleEventLogDTO);
         return safetyFetchModulesByProject(project).stream()
@@ -56,5 +63,20 @@ public class ModuleEventLogServiceImpl implements ModuleEventLogService {
 
     protected PVector<Module> safetyFetchModulesByProject(final Project project){
         return TreePVector.from(moduleRepository.findByProjectId(project.getId()));
+    }
+
+    protected PVector<ModuleEventLogDTO> fetchListLogsDTOByListLogs(final List<ModuleEventLog> moduleEventLogs){
+        return TreePVector.from(moduleEventLogs.stream()
+                                               .map(this::fetchLogDTOByLog)
+                                               .collect(Collectors.toList()));
+    }
+
+    protected ModuleEventLogDTO fetchLogDTOByLog(final ModuleEventLog moduleEventLog){
+        return new ModuleEventLogDTO( moduleEventLog.getModule()
+                                                    .getProject()
+                                                    .getProjectName()
+                                    , moduleEventLog.getModule()
+                                                    .getModuleName()
+                                    , moduleEventLog.getTextLog());
     }
 }
