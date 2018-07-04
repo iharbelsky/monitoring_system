@@ -47,6 +47,25 @@ public class ConfigurationController {
         return mav;
     }
 
+    @RequestMapping(value = "/main/edit_project/{project_name}", method = RequestMethod.GET)
+    public ModelAndView editProjectGetController( @PathVariable("project_name") final String projectName) {
+        final var mav = new ModelAndView();
+        mav.setViewName("edit_project");
+        mav.addObject("project", projectService.fetchProjectByProjectName(projectName));
+        return mav;
+    }
+
+    @RequestMapping(value = "/main/edit_project", method = RequestMethod.POST)
+    public ModelAndView editProject ( @RequestParam("id") final Long id
+                                    , @RequestParam("project_name") final String projectName
+                                    , @RequestParam(value = "description", required = false) final String description){
+        final var mav = new ModelAndView();
+        projectService.editProject(id, projectName, description);
+        mav.addObject("success_message", "Project edited successfully");
+        mav.setViewName("complete_page");
+        return mav;
+    }
+
     @RequestMapping(value = "/main/view_project/{project_name}", method = RequestMethod.GET)
     public ModelAndView viewProject( @PathVariable("project_name") final String projectName){
         final var mav = new ModelAndView();
@@ -59,7 +78,7 @@ public class ConfigurationController {
     protected ModelAndView handleResourceExistsException(ResourceExistsException e){
         final var mav = new ModelAndView();
         mav.addObject("error_message", e.getMessage());
-        mav.setViewName("create_new_project");
+        mav.setViewName("error_page");
         return mav;
      }
 
@@ -67,7 +86,7 @@ public class ConfigurationController {
     protected ModelAndView handleInvalidRequestParamsException(InvalidRequestParamsException e){
         final var mav = new ModelAndView();
         mav.addObject("error_message", e.getMessage());
-        mav.setViewName("create_new_project");
+        mav.setViewName("error_page");
         return mav;
     }
 

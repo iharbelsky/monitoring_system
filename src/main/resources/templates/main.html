@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Monitoring System</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js"></script>
@@ -34,6 +34,14 @@
         });
     })
 </script>
+<script>
+    $(function () {
+        $('.crud-buttons').on("click",".edit-button", function() {
+            var project_name = $(this).closest("td").prev().prev().text();
+            location.href = "/main/edit_project/" + project_name;
+        });
+    })
+</script>
 
 <body>
 
@@ -54,7 +62,7 @@
                 <td class="cell3">
                     <div class="crud-buttons">
                         <button type="button" class="btn btn-light table-button view-button">View</button>
-                        <button type="button" class="btn btn-light table-button">Edit</button>
+                        <button type="button" class="btn btn-light table-button edit-button">Edit</button>
                         <button type="button" class="btn btn-light table-button delete-button">Delete</button>
                     </div>
                 </td>

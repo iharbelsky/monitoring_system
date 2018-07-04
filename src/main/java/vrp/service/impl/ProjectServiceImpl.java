@@ -53,6 +53,17 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteByProjectName(projectName);
     }
 
+    @Override
+    public ProjectDTO fetchProjectByProjectName(final String projectName) {
+        return fetchProjectDTObyProject(projectRepository.findByProjectName(projectName).get());
+    }
+
+    @Override
+    @Transactional
+    public void editProject(Long id, String projectName, String description) {
+        projectRepository.updateProjectById(id, projectName, description);
+    }
+
     protected void validateProjectIsExists(final String projectName){
        if(projectRepository.findByProjectName(projectName)
                            .isPresent()){
@@ -90,6 +101,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     protected ProjectDTO fetchProjectDTObyProject(final Project project){
-        return new ProjectDTO(project.getProjectName(), project.getDescription());
+        return new ProjectDTO( project.getId(), project.getProjectName(), project.getDescription());
     }
 }

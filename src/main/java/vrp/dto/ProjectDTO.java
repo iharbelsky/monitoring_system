@@ -9,6 +9,7 @@ public class ProjectDTO {
     // Calculated fields
     //
 
+    private Long id;
     private String projectName;
     private String description;
 
@@ -17,7 +18,8 @@ public class ProjectDTO {
     // Constructors
     //
 
-    public ProjectDTO(final String projectName, final String description) {
+    public ProjectDTO(final Long id, final String projectName, final String description) {
+        this.id = id;
         this.projectName = projectName;
         this.description = description;
         validateCreateObject();
@@ -36,6 +38,9 @@ public class ProjectDTO {
         return description;
     }
 
+    public Long getId() {
+        return id;
+    }
 
     //////////////////////////////////
     // Validate invariants fields

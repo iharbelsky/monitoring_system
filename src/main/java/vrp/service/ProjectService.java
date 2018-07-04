@@ -8,4 +8,6 @@ public interface ProjectService {
     PVector<ProjectDTO> fetchAllProjects();
     void deleteProject(String projectName);
     String checkProject(String projectName);
+    ProjectDTO fetchProjectByProjectName(String projectName);
+    void editProject (Long id, String projectName, String description);
 }
