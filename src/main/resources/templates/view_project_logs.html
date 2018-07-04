@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Project Logs</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/view_project.css" rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table custom-table">
+        <thead>
+        <tr>
+            <th class="col1">Project name</th>
+            <th class="col2">Module name</th>
+            <th class="col3">Text Log</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="log : ${logs}">
+            <tr>
+                <td th:text="${log.projectName}">...</td>
+                <td th:text="${log.moduleName}">...</td>
+                <td th:text="${log.textLog}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <button class="btn btn-danger custom-button" onclick="window.location.replace('/main');return false;">Cancel
+    </button>
+</div>
+</body>
+</html>

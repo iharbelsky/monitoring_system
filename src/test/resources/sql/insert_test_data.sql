@@ -1,6 +1,6 @@
 --INSERT TEST VALUE INTO projects
-INSERT INTO monitoring.projects(name_project) VALUES('internet-shop');
-INSERT INTO monitoring.projects(name_project) VALUES('films-library');
+INSERT INTO monitoring.projects(name_project, description) VALUES('internet-shop', 'This is internet-shop');
+INSERT INTO monitoring.projects(name_project, description) VALUES('films-library', 'This is films-library');
 
 --INSERT TEST VALUE INTO modules
 INSERT INTO monitoring.modules(name_module,id_project) VALUES('controller',1);

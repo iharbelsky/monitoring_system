@@ -20,6 +20,9 @@ public class Project {
     @Column(name = "name_project")
     private String projectName;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="id_project")
     private Set<Module> projectModules;
@@ -40,6 +43,14 @@ public class Project {
     public Project(String projectName, Set<Module> projectModules){
         this.projectName = projectName;
         this.projectModules = projectModules;
+        validateCreateObject();
+    }
+
+    public Project(String projectName, String description, Set<Module> projectModules) {
+        this.projectName = projectName;
+        this.description = description;
+        this.projectModules = projectModules;
+        validateCreateObject();
     }
 
 
@@ -71,6 +82,13 @@ public class Project {
         this.projectModules = projectModules;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    protected void setDescription(String description) {
+        this.description = description;
+    }
 
     //////////////////////////////////
     // Validate invariants fields

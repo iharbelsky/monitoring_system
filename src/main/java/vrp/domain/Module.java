@@ -3,6 +3,7 @@ package vrp.domain;
 import org.apache.commons.lang3.StringUtils;
 import vrp.exception.CreateInvalidObjectException;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "modules", schema = "monitoring")
@@ -19,9 +20,13 @@ public class Module {
     @Column(name = "name_module")
     private String moduleName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_project")
     private Project project;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_module")
+    private List<ModuleEventLog> moduleLogs;
 
 
     //////////////////////////////////
@@ -71,6 +76,13 @@ public class Module {
         this.project = project;
     }
 
+    public List<ModuleEventLog> getModuleLogs() {
+        return moduleLogs;
+    }
+
+    protected void setModuleLogs(List<ModuleEventLog> moduleLogs) {
+        this.moduleLogs = moduleLogs;
+    }
 
     //////////////////////////////////
     // Validate invariants fields

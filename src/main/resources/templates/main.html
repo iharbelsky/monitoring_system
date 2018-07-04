@@ -1,31 +1,81 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Main Page</title>
+    <meta charset="UTF-8">
+    <title>Monitoring System</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
+<script>
+  $(function () {
+      $('.crud-buttons').on("click", ".delete-button", function () {
+          var flag = confirm("Do you really want to delete this project? This will result in the loss of all modules and logs of this project");
+          if (flag === true) {
+              var project_name = $(this).closest("td").prev().prev().text();
+              $.ajax({
+                  type: 'POST',
+                  url: 'delete-project',
+                  data: { project_name: project_name},
+                  success: function () {
+                      location.reload();
+                  }
+              });
+          }
+      });
+      return false;
+  })
+</script>
+<script>
+    $(function () {
+        $('.crud-buttons').on("click",".view-button", function() {
+            var project_name = $(this).closest("td").prev().prev().text();
+            location.href = "/main/view_project/" + project_name;
+        });
+    })
+</script>
+<script>
+    $(function () {
+        $('.crud-buttons').on("click",".edit-button", function() {
+            var project_name = $(this).closest("td").prev().prev().text();
+            location.href = "/main/edit_project/" + project_name;
+        });
+    })
+</script>
+
 <body>
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="display-3">Welcome to the Monitoring System</h1>
-        <p>This application serves for obtaining logs from various projects and their further storage</p>
-    </div>
-</div>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-5" align="center">
-            <h2>Create project and dependent modules</h2>
-            <p>In this menu, a new project and its dependent modules are created</p>
-            <p><a class="btn btn-secondary" href="/main/create_new_project" role="button">View details »</a></p>
-        </div>
-    </div>
-    <br><br><br><br><br><br><br>
-    <hr>
-    <footer>
-        <p>© VRP Consulting 2018</p>
-    </footer>
+    <table class="table custom-table">
+        <thead>
+        <tr>
+            <th class="col1">Project name</th>
+            <th class="col2">Description</th>
+            <th class="col3"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="project : ${projects}">
+            <tr>
+                <td th:text="${project.projectName}">...</td>
+                <td th:text="${project.description}">...</td>
+                <td class="cell3">
+                    <div class="crud-buttons">
+                        <button type="button" class="btn btn-light table-button view-button">View</button>
+                        <button type="button" class="btn btn-light table-button edit-button">Edit</button>
+                        <button type="button" class="btn btn-light table-button delete-button">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <button class="btn btn-success custom-button"
+            onclick="window.location.replace('/main/create_new_project');return false;">Add new project
+    </button>
+    <button class="btn btn-danger custom-button" onclick="window.location.replace('/login');return false;">Cancel
+    </button>
 </div>
+
 </body>
 </html>

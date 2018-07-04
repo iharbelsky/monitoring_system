@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit project</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/edit_project.css" rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#project-name').keyup(function () {
+                var value = $('#project-name').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/check-project',
+                    data: { project_name: value},
+                    success: function (data) {
+                        if(data === "ok"){
+                            $("#check_result").css("background-color", "#25B328");
+                        }
+                        if(data === "Exists"){
+                            $("#check_result").css("background-color", "#DBB418");
+                        }
+                        $('.results').html(data);
+                    }
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="custom-form">
+        <div class="answer-message">
+            <span class="error_message" th:utext="${error_message}"></span>
+            <span class="success_message" th:utext="${success_message}"></span>
+        </div>
+        <form action="/main/edit_project" method="post">
+            <div class="form-group project-name">
+                <table class="project-table">
+                    <tr>
+                        <td class='col1'><span>Project name</span></td>
+                        <td class='col2'><input type="text" id="project-name" class="form-control" name="project_name"  th:value="${project.projectName}"></td>
+                        <td class='col3'><div id="check_result"><label class="results"></label></div></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group description">
+                <span>Description</span>
+                <textarea class="form-control" rows="5" name="description" th:field = "${project.description}"></textarea>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-success custom-button" type="submit">Edit project</button>
+                <button class="btn btn-danger custom-button" onclick="window.location.replace('/main');return false;">Cancel</button>
+            </div>
+            <div class="hidden">
+                <input type="hidden" name="id" th:value="${project.id}">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
