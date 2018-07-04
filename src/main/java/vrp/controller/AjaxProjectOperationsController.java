@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 import vrp.service.ProjectService;
 
 @RestController
-public class AjaxController {
+public class AjaxProjectOperationsController {
 
     private final ProjectService projectService;
 
     @Autowired
-    public AjaxController(final ProjectService projectService) {
+    public AjaxProjectOperationsController(final ProjectService projectService) {
         this.projectService = projectService;
     }
 

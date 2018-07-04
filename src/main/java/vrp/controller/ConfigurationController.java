@@ -32,14 +32,14 @@ public class ConfigurationController {
     }
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.GET)
-    public ModelAndView createNewProjectGetController(){
+    public ModelAndView createProjectView(){
         return new ModelAndView("create_new_project");
     }
 
     @RequestMapping(value = "/main/create_new_project", method = RequestMethod.POST)
-    public ModelAndView createNewProjectPostController( @RequestParam("project_name") final String projectName
-                                                      , @RequestParam(value = "description", required = false) final String description
-                                                      , @RequestParam(value = "module_names[]", required = false) final String [] moduleNames){
+    public ModelAndView createProject( @RequestParam("project_name") final String projectName
+                                     , @RequestParam(value = "description", required = false) final String description
+                                     , @RequestParam(value = "module_names[]", required = false) final String [] moduleNames){
         final var mav = new ModelAndView();
         projectService.saveProject(projectName, description, moduleNames);
         mav.addObject("success_message", "Project added successfully");
@@ -48,7 +48,7 @@ public class ConfigurationController {
     }
 
     @RequestMapping(value = "/main/edit_project/{project_name}", method = RequestMethod.GET)
-    public ModelAndView editProjectGetController( @PathVariable("project_name") final String projectName) {
+    public ModelAndView editProjectView( @PathVariable("project_name") final String projectName) {
         final var mav = new ModelAndView();
         mav.setViewName("edit_project");
         mav.addObject("project", projectService.fetchProjectByProjectName(projectName));
