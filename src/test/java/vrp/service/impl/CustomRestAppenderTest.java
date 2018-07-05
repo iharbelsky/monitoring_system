@@ -3,6 +3,8 @@ package vrp.service.impl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class CustomRestAppenderTest {
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    public void correctSendLogAndSaveToDBTest(){
+    public void correctSendLogAndSaveToDBTest() throws JSONException {
         final Logger logger = LogManager.getLogger(CustomRestAppenderTest.class.getName());
         logger.removeAppender("appender_for_test");
 
@@ -35,7 +37,7 @@ public class CustomRestAppenderTest {
 
         final List<String> textLogs = jdbcTemplate.query(SQL_QUERY, (rs,Long) -> rs.getString("text_log"));
         assertEquals(1, textLogs.size());
-        assertTrue(textLogs.get(0).contains("\"textLog\" : \"Test message\""));
+        assertEquals("Test message",new JSONObject(textLogs.get(0)).getString("textLog"));
     }
 
     @Test
