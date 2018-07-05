@@ -35,6 +35,7 @@ public class CustomRestAppenderTest {
 
         final List<String> textLogs = jdbcTemplate.query(SQL_QUERY, (rs,Long) -> rs.getString("text_log"));
         assertEquals(1, textLogs.size());
+        assertTrue(textLogs.get(0).contains("\"textLog\" : \"Test message\""));
     }
 
     @Test
